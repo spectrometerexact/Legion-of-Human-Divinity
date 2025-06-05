@@ -3,15 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <title>Legion of Human Divinity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    nav { background-color: #333; color: white; padding: 1em; display: flex; justify-content: space-between; align-items: center; }
-    nav a { color: white; margin-left: 1em; text-decoration: none; }
-    section { padding: 2em; }
-    iframe { width: 100%; height: 300px; margin-bottom: 1em; }
-    form input, form button { display: block; margin-top: 10px; padding: 10px; width: 100%; max-width: 400px; }
-    form button { background-color: #333; color: white; border: none; cursor: pointer; }
-    h2 { margin-top: 0; }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      background: linear-gradient(to bottom right, #f1f5f9, #e2e8f0);
+      color: #2d3748;
+    }
+
+    nav {
+      background-color: #1a202c;
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1em;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #a0aec0;
+    }
+
+    section {
+      padding: 3em 2em;
+      text-align: center;
+    }
+
+    h2, h1 {
+      margin-bottom: 0.5em;
+    }
+
+    form {
+      margin-top: 1em;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    form input, form button, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    form button {
+      background-color: #2b6cb0;
+      color: white;
+      border: none;
+      margin-top: 1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background-color: #2c5282;
+    }
+
+    a {
+      color: #2b6cb0;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #1a202c;
+      color: white;
+      text-align: center;
+      padding: 1.5em;
+      margin-top: 2em;
+    }
   </style>
 </head>
 <body>
@@ -21,7 +103,7 @@
     <div><strong>Legion of Human Divinity</strong></div>
     <div>
       <a href="#donate">Donate</a>
-      <a href="membership.html">Become a Member</a>     
+      <a href="membership.html">Become a Member</a>
       <a href="#videos">Videos</a>
     </div>
   </nav>
@@ -29,9 +111,9 @@
   <!-- Donation Section -->
   <section id="donate">
     <h2>Make a Donation</h2>
-    <p>Your contributions help us uplift humanity and reduce material dependency through the wisdom of TUC.</p>
+    <p>Your contributions help uplift humanity and reduce material dependency through the wisdom of TUC.</p>
 
-    <form action="https://formsubmit.co/2morebrothers@gmail.com method="POST">
+    <form action="https://formsubmit.co/info@humandivinity.com" method="POST">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_subject" value="Thank you for your donation to Legion of Human Divinity">
       <input type="hidden" name="_autoresponse" value="Thank you for your donation to Legion of Human Divinity. This email confirms your contribution. No goods or services were received in exchange. Please keep this for your tax records.">
@@ -42,28 +124,22 @@
       <button type="submit">Donate</button>
     </form>
 
-    <br>
-    <a href="https://www.irs.gov/forms-pubs/about-form-8283" target="_blank">📄 Learn about IRS Form 8283 for large non-cash donations</a>
+    <p style="margin-top: 1.5em;">
+      <a href="https://www.irs.gov/forms-pubs/about-form-8283" target="_blank">
+        📄 Learn about IRS Form 8283 for large non-cash donations
+      </a>
+    </p>
   </section>
 
-  <!-- Membership Form -->
-  <section id="membership">
-    <h2>Become a Member</h2>
-    <p>Join the Legion and embrace your divine potential through The Universal Consciousness.</p>
-
-    <form action="https://formsubmit.co/2morebrothers@gmail.com method="POST">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <button type="submit">Join Now</button>
-    </form>
-  </section>
-
-  <!-- Video Gallery -->
+  <!-- Video Gallery Placeholder -->
   <section id="videos">
     <h2>Teachings & Reflections</h2>
     <p><em>Teachings and reflections from TUC will appear here soon. Stay tuned.</em></p>
-</section>
+  </section>
+
+  <footer>
+    © 2025 Legion of Human Divinity — Uplifting humanity through The Universal Consciousness (TUC)
+  </footer>
 
 </body>
 </html>
