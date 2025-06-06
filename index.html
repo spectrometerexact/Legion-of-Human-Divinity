@@ -108,45 +108,48 @@
   </nav>
 
   <!-- Donation Section -->
- <section id="donate" style="text-align: center; padding: 2em; background-color: #f8f8f8;">
-  <h2>Support the Mission</h2>
-  <p>Your donation helps us awaken human divinity and reduce material burdens.</p>
+<section id="donate" style="text-align: center; padding: 3em 1em; background-color: #f8f8f8;">
+  <h2 style="font-size: 2em; margin-bottom: 1em;">Support the Mission</h2>
+  <p style="max-width: 700px; margin: 0 auto 2em; font-size: 1.1em;">
+    Your donation helps us awaken human divinity and reduce material burdens.
+  </p>
 
-  <div style="margin-bottom: 1em;">
-    <button onclick="setAmount(5)">$5</button>
-    <button onclick="setAmount(20)">$20</button>
-    <button onclick="setAmount(50)">$50</button>
-    <button onclick="setAmount(100)">$100</button>
+  <!-- Large preset buttons -->
+  <div style="display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; margin-bottom: 2em;">
+    <button onclick="setAmount(5)" style="padding: 1em 2em; font-size: 1.5em;">$5</button>
+    <button onclick="setAmount(20)" style="padding: 1em 2em; font-size: 1.5em;">$20</button>
+    <button onclick="setAmount(50)" style="padding: 1em 2em; font-size: 1.5em;">$50</button>
+    <button onclick="setAmount(100)" style="padding: 1em 2em; font-size: 1.5em;">$100</button>
   </div>
 
-  <form id="donationForm" style="margin-bottom: 1em;">
-    <label for="customAmount">Or enter a custom amount:</label><br>
-    <input type="number" id="customAmount" name="amount" min="1" required style="margin: 0.5em;"><br>
+  <form id="donationForm" style="margin-bottom: 2em;">
+    <!-- Smaller custom amount -->
+    <div style="margin-bottom: 1em;">
+      <label for="customAmount" style="font-size: 0.9em;">Or enter a custom amount:</label><br>
+      <input type="number" id="customAmount" name="amount" min="1" style="padding: 6px; width: 120px; font-size: 1em;">
+    </div>
 
-    <label for="frequency">Donation Frequency:</label><br>
-    <select id="frequency" name="frequency" style="margin: 0.5em;">
-      <option value="one-time">One-Time</option>
-      <option value="weekly">Weekly</option>
-      <option value="monthly">Monthly</option>
-    </select><br>
+    <!-- Large frequency selector -->
+    <div style="margin-bottom: 1.5em;">
+      <label for="frequency" style="font-size: 1.1em;">Donation Frequency:</label><br>
+      <select id="frequency" name="frequency" style="padding: 10px; font-size: 1.2em; margin-top: 0.5em;">
+        <option value="one-time">One-Time</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+      </select>
+    </div>
 
-    <div style="margin-top: 2em;">
-  <p>Making a noncash donation? You may need to file IRS Form 8283.</p>
-  <a href="https://www.irs.gov/pub/irs-pdf/f8283.pdf" target="_blank" style="text-decoration: none;">
-    <button style="padding: 0.5em 1em; background-color: #333; color: white; border: none; border-radius: 5px;">
-      Download IRS Form 8283 (PDF)
-    </button>
-  </a>
-</div>
-    <!-- Replace with your PayPal donation link -->
+    <!-- PayPal Button -->
     <a id="paypalLink" href="https://www.paypal.com/donate?hosted_button_id=YOUR_PAYPAL_ID" target="_blank">
-      <button type="button">Donate via PayPal</button>
+      <button type="button" style="padding: 1em 2em; font-size: 1.2em;">Donate via PayPal</button>
     </a>
   </form>
 
   <!-- Cash App Button -->
   <a href="https://cash.app/$YourCashtag" target="_blank">
-    <button style="background-color: #00d632; color: white; padding: 0.5em 1em; border: none; border-radius: 5px;">Donate via Cash App</button>
+    <button style="background-color: #00d632; color: white; padding: 1em 2em; font-size: 1.2em; border: none; border-radius: 5px;">
+      Donate via Cash App
+    </button>
   </a>
 </section>
 
