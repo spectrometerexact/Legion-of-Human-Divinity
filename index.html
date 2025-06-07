@@ -138,7 +138,9 @@
         <option value="monthly">Monthly</option>
       </select>
     </div>
-
+<div id="thankYouBanner" style="display: none; background-color: #e0f7fa; color: #00695c; padding: 1em; margin: 1em auto; max-width: 600px; text-align: center; border-radius: 6px; font-size: 1.1em;">
+  You’ve committed to saving our future! Thanks!
+</div> 
     <!-- Donation Buttons -->
 <div style="display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; margin-bottom: 2em;">
   <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=5" target="_blank">
@@ -161,22 +163,7 @@
     </button>
   </a>
 </section>
-
-<script>
-  function setAmount(amount) {
-    document.getElementById('customAmount').value = amount;
-  }
-
-  document.getElementById('donationForm').addEventListener('change', function () {
-    const amount = document.getElementById('customAmount').value;
-    const frequency = document.getElementById('frequency').value;
-    let paypalBase = "https://www.paypal.com/donate/?hosted_button_id=H4M6TNMPLAZSL"
-      if (amount) {
-       paypalBase += `&amount=${amount}`;
-    }
-    document.getElementById('paypalLink').href = paypalBase;
-  });
-</script>
+  
   <p style="margin-top: 1.5em;">
       <a href="https://www.irs.gov/forms-pubs/about-form-8283" target="_blank">
         📄 Learn about IRS Form 8283 for large non-cash donations
@@ -193,6 +180,18 @@
   <footer>
     © 2025 Legion of Human Divinity — Uplifting humanity through The Universal Consciousness (TUC)
   </footer>
+<script>
+  const donateButtons = document.querySelectorAll('a[target="_blank"]');
+  const banner = document.getElementById('thankYouBanner');
 
+  donateButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      banner.style.display = 'block';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 5000); // hide after 5 seconds
+    });
+  });
+</script>
 </body>
 </html>
