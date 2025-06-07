@@ -140,7 +140,7 @@
     </div>
 
     <!-- PayPal Button -->
-    <a id="paypalLink" href="https://www.paypal.com/donate?hosted_button_id=YOUR_PAYPAL_ID" target="_blank">
+    <a id="paypalLink" href=">https://www.paypal.com/donate/?hosted_button_id=H4M6TNMPLAZSL"      
       <button type="button" style="padding: 1em 2em; font-size: 1.2em;">Donate via PayPal</button>
     </a>
   </form>
@@ -161,9 +161,9 @@
   document.getElementById('donationForm').addEventListener('change', function () {
     const amount = document.getElementById('customAmount').value;
     const frequency = document.getElementById('frequency').value;
-    let paypalBase = "https://www.paypal.com/donate?hosted_button_id=YOUR_PAYPAL_ID";
+    let paypalBase = "https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL";    
     if (amount) {
-      paypalBase += `&amount=${amount}`;
+       paypalBase += `&amount=${amount}`;
     }
     document.getElementById('paypalLink').href = paypalBase;
   });
