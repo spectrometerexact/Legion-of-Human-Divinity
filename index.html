@@ -161,8 +161,8 @@
   document.getElementById('donationForm').addEventListener('change', function () {
     const amount = document.getElementById('customAmount').value;
     const frequency = document.getElementById('frequency').value;
-    let paypalBase = "https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL";    
-    if (amount) {
+    let paypalBase = "https://www.paypal.com/donate/?hosted_button_id=H4M6TNMPLAZSL"
+      if (amount) {
        paypalBase += `&amount=${amount}`;
     }
     document.getElementById('paypalLink').href = paypalBase;
