@@ -109,60 +109,57 @@
 
   <!-- Donation Section -->
 <section id="donate" style="text-align: center; padding: 3em 1em; background-color: #f8f8f8;">
+
+  <!-- Thank You Banner -->
+  <div id="thankYouBanner" style="display: none; background-color: #e0f7fa; color: #00695c; padding: 1em; margin: 1em auto; max-width: 600px; text-align: center; border-radius: 6px; font-size: 1.1em;">
+    You’ve committed to saving our future! Thanks!
+  </div>
+
   <h2 style="font-size: 2em; margin-bottom: 1em;">Support the Mission</h2>
   <p style="max-width: 700px; margin: 0 auto 2em; font-size: 1.1em;">
     Your donation helps us awaken human divinity and reduce material burdens.
   </p>
 
-  <!-- Large preset buttons -->
+  <!-- Large preset donation buttons -->
   <div style="display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; margin-bottom: 2em;">
-    <button onclick="setAmount(5)" style="padding: 1em 2em; font-size: 1.5em;">$5</button>
-    <button onclick="setAmount(20)" style="padding: 1em 2em; font-size: 1.5em;">$20</button>
-    <button onclick="setAmount(50)" style="padding: 1em 2em; font-size: 1.5em;">$50</button>
-    <button onclick="setAmount(100)" style="padding: 1em 2em; font-size: 1.5em;">$100</button>
+    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=5" target="_blank" class="donate-btn">
+      <button style="padding: 1em 2em; font-size: 1.5em;">$5</button>
+    </a>
+    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=20" target="_blank" class="donate-btn">
+      <button style="padding: 1em 2em; font-size: 1.5em;">$20</button>
+    </a>
+    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=50" target="_blank" class="donate-btn">
+      <button style="padding: 1em 2em; font-size: 1.5em;">$50</button>
+    </a>
+    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=100" target="_blank" class="donate-btn">
+      <button style="padding: 1em 2em; font-size: 1.5em;">$100</button>
+    </a>
   </div>
 
-  <form id="donationForm" style="margin-bottom: 2em;">
-    <!-- Smaller custom amount -->
-    <div style="margin-bottom: 1em;">
-      <label for="customAmount" style="font-size: 0.9em;">Or enter a custom amount:</label><br>
-      <input type="number" id="customAmount" name="amount" min="1" style="padding: 6px; width: 120px; font-size: 1em;">
-    </div>
-
-    <!-- Large frequency selector -->
-    <div style="margin-bottom: 1.5em;">
-      <label for="frequency" style="font-size: 1.1em;">Donation Frequency:</label><br>
-      <select id="frequency" name="frequency" style="padding: 10px; font-size: 1.2em; margin-top: 0.5em;">
-        <option value="one-time">One-Time</option>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-      </select>
-    </div>
-<div id="thankYouBanner" style="display: none; background-color: #e0f7fa; color: #00695c; padding: 1em; margin: 1em auto; max-width: 600px; text-align: center; border-radius: 6px; font-size: 1.1em;">
-  You’ve committed to saving our future! Thanks!
-</div> 
-    <!-- Donation Buttons -->
-<div style="display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; margin-bottom: 2em;">
-  <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=5" target="_blank">
-    <button style="padding: 1em 2em; font-size: 1.5em;">$5</button>
-  </a>
-  <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=20" target="_blank">
-    <button style="padding: 1em 2em; font-size: 1.5em;">$20</button>
-  </a>
-  <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=50" target="_blank">
-    <button style="padding: 1em 2em; font-size: 1.5em;">$50</button>
-  </a>
-  <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=100" target="_blank">
-    <button style="padding: 1em 2em; font-size: 1.5em;">$100</button>
-  </a>
-</div>
   <!-- Cash App Button -->
-  <a href="https://cash.app/$YourCashtag" target="_blank">
+  <a href="https://cash.app/$YourCashtag" target="_blank" class="donate-btn">
     <button style="background-color: #00d632; color: white; padding: 1em 2em; font-size: 1.2em; border: none; border-radius: 5px;">
       Donate via Cash App
     </button>
   </a>
 </section>
+
+<!-- Thank You Script -->
+<script>
+  const donateLinks = document.querySelectorAll('.donate-btn');
+  const banner = document.getElementById('thankYouBanner');
+
+  donateLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      banner.style.display = 'block';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 5000);
+    });
+  });
+</script>
+ 
+</div> 
   
   <p style="margin-top: 1.5em;">
       <a href="https://www.irs.gov/forms-pubs/about-form-8283" target="_blank">
