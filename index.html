@@ -1,194 +1,87 @@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Legion of Human Divinity</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Quicksand', sans-serif;
-      margin: 0;
-      background: linear-gradient(to bottom right, #f1f5f9, #e2e8f0);
-      color: #2d3748;
-    }
-
-    nav {
-      background-color: #1a202c;
-      color: white;
-      padding: 1em 2em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    nav a {
-      color: white;
-      margin-left: 1em;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #a0aec0;
-    }
-
-    section {
-      padding: 3em 2em;
-      text-align: center;
-    }
-
-    h2, h1 {
-      margin-bottom: 0.5em;
-    }
-
-    form {
-      margin-top: 1em;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      background: white;
-      padding: 2em;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    form input, form button, form textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: 1px solid #cbd5e0;
-      border-radius: 6px;
-      font-size: 1em;
-    }
-
-    form button {
-      background-color: #2b6cb0;
-      color: white;
-      border: none;
-      margin-top: 1em;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    form button:hover {
-      background-color: #2c5282;
-    }
-
-    a {
-      color: #2b6cb0;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background-color: #1a202c;
-      color: white;
-      text-align: center;
-      padding: 1.5em;
-      margin-top: 2em;
-    }
-  </style>
 </head>
-<body>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
 
-  <!-- Navigation Bar -->
-  <nav>
-    <div><strong>Legion of Human Divinity</strong></div>
-    <div>
-      <a href="#donate">Donate</a>
-      <a href="membership.html">Become a Member</a>
-      <a href="#videos">Videos</a>
-    </div>
-  </nav>
+  <!-- Navigation -->
+  <header style="background-color: #222; padding: 1em; color: white; text-align: center;">
+    <nav>
+      <a href="#donate" style="color: white; text-decoration: none; margin: 0 15px;">Donate</a>
+      <a href="#membership" style="color: white; text-decoration: none; margin: 0 15px;">Become a Member</a>
+    </nav>
+  </header>
 
-  <!-- Donation Section -->
-<section id="donate" style="text-align: center; padding: 3em 1em; background-color: #f8f8f8;">
-
-  <!-- Thank You Banner -->
-  <div id="thankYouBanner" style="display: none; background-color: #e0f7fa; color: #00695c; padding: 1em; margin: 1em auto; max-width: 600px; text-align: center; border-radius: 6px; font-size: 1.1em;">
-    You’ve committed to saving our future! Thanks!
-  </div>
-
-  <h2 style="font-size: 2em; margin-bottom: 1em;">Support the Mission</h2>
-  <p style="max-width: 700px; margin: 0 auto 2em; font-size: 1.1em;">
-    Your donation helps us awaken human divinity and reduce material burdens.
-  </p>
-
-  <!-- Large preset donation buttons -->
-  <div style="display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; margin-bottom: 2em;">
-    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=5" target="_blank" class="donate-btn">
-      <button style="padding: 1em 2em; font-size: 1.5em;">$5</button>
-    </a>
-    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=20" target="_blank" class="donate-btn">
-      <button style="padding: 1em 2em; font-size: 1.5em;">$20</button>
-    </a>
-    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=50" target="_blank" class="donate-btn">
-      <button style="padding: 1em 2em; font-size: 1.5em;">$50</button>
-    </a>
-    <a href="https://www.paypal.com/donate/?hosted_button_id=H4M6TMNPLAZSL&amount=100" target="_blank" class="donate-btn">
-      <button style="padding: 1em 2em; font-size: 1.5em;">$100</button>
-    </a>
-  </div>
-
-  <!-- Cash App Button -->
-  <a href="https://cash.app/$YourCashtag" target="_blank" class="donate-btn">
-    <button style="background-color: #00d632; color: white; padding: 1em 2em; font-size: 1.2em; border: none; border-radius: 5px;">
-      Donate via Cash App
-    </button>
-  </a>
-</section>
-
-<!-- Thank You Script -->
-<script>
-  const donateLinks = document.querySelectorAll('.donate-btn');
-  const banner = document.getElementById('thankYouBanner');
-
-  donateLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      banner.style.display = 'block';
-      setTimeout(() => {
-        banner.style.display = 'none';
-      }, 5000);
-    });
-  });
-</script>
- 
-</div> 
-  
-  <p style="margin-top: 1.5em;">
-      <a href="https://www.irs.gov/forms-pubs/about-form-8283" target="_blank">
-        📄 Learn about IRS Form 8283 for large non-cash donations
-      </a>
+  <!-- Hero / Mission -->
+  <section style="padding: 4em 1em; text-align: center; background-color: #eee;">
+    <h1>Legion of Human Divinity</h1>
+    <p style="max-width: 600px; margin: auto; font-size: 1.2em;">
+      Awakening the divine potential within all people through spiritual unity, communal support, and conscious living.
     </p>
   </section>
 
-  <!-- Video Gallery Placeholder -->
-  <section id="videos">
-    <h2>Teachings & Reflections</h2>
-    <p><em>Teachings and reflections from TUC will appear here soon. Stay tuned.</em></p>
+  <!-- Membership Section -->
+  <section id="membership" style="padding: 3em 1em; text-align: center;">
+    <h2>Why Become a Member?</h2>
+    <p style="max-width: 700px; margin: auto; font-size: 1.1em;">
+      Membership in the Legion of Human Divinity is more than affiliation — it is a declaration of purpose. 
+      As a member, you become part of a spiritual movement that seeks to awaken the divine potential within 
+      each person by reducing material dependency and building meaningful community support.
+    </p>
+
+    <h3 style="margin-top: 2em;">Our Mission</h3>
+    <p style="max-width: 700px; margin: auto; font-size: 1.1em;">
+      Guided by The Universal Consciousness (TUC), we are devoted to advancing the human experience by creating pathways 
+      to reduce the burden of material dependency and lessen the cost of everyday living. We believe that by uplifting one 
+      another, we honor the sacred presence of divinity within us all.
+    </p>
+
+    <p style="font-weight: bold; margin-top: 2em; font-size: 1.2em;">
+      Be a part of something that matters — because you matter.
+    </p>
   </section>
 
-  <footer>
-    © 2025 Legion of Human Divinity — Uplifting humanity through The Universal Consciousness (TUC)
-  </footer>
-<script>
-  const donateButtons = document.querySelectorAll('a[target="_blank"]');
-  const banner = document.getElementById('thankYouBanner');
+  <!-- Donation Section -->
+  <section id="donate" style="text-align: center; padding: 3em 1em; background-color: #f8f8f8;">
 
-  donateButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      banner.style.display = 'block';
-      setTimeout(() => {
-        banner.style.display = 'none';
-      }, 5000); // hide after 5 seconds
-    });
-  });
-</script>
+    <h2 style="font-size: 2em; margin-bottom: 1em;">Support the Mission</h2>
+    <p style="max-width: 700px; margin: 0 auto 2em; font-size: 1.1em;">
+      Your donation helps us awaken human divinity and reduce material burdens.
+    </p>
+
+    <!-- Preset PayPal Donation Buttons -->
+    <div style="display: flex; justify-content: center; gap: 1em; flex-wrap: wrap; margin-bottom: 2em;">
+      <a href="https://www.paypal.me/YourUsername/5" target="_blank">
+        <button style="padding: 1em 2em; font-size: 1.5em;">$5</button>
+      </a>
+      <a href="https://www.paypal.me/YourUsername/20" target="_blank">
+        <button style="padding: 1em 2em; font-size: 1.5em;">$20</button>
+      </a>
+      <a href="https://www.paypal.me/YourUsername/50" target="_blank">
+        <button style="padding: 1em 2em; font-size: 1.5em;">$50</button>
+      </a>
+      <a href="https://www.paypal.me/YourUsername/100" target="_blank">
+        <button style="padding: 1em 2em; font-size: 1.5em;">$100</button>
+      </a>
+    </div>
+
+    <!-- Cash App Button -->
+    <a href="https://cash.app/$YourCashtag" target="_blank">
+      <button style="background-color: #00d632; color: white; padding: 1em 2em; font-size: 1.2em; border: none; border-radius: 5px;">
+        Donate via Cash App
+      </button>
+    </a>
+
+  </section>
+
+  <!-- Footer -->
+  <footer style="background-color: #222; color: white; text-align: center; padding: 1em;">
+    &copy; 2025 Legion of Human Divinity
+  </footer>
+
 </body>
 </html>
