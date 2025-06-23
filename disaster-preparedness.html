@@ -4,34 +4,81 @@
   <meta charset="UTF-8" />
   <title>Disaster Preparedness | Legion of Human Divinity</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .icon-section { display: flex; flex-wrap: wrap; gap: 1.5em; justify-content: center; margin-top: 2em; }
+    .icon-box {
+      flex: 1 1 200px;
+      background: #f1f1f1;
+      border-radius: 10px;
+      padding: 1.5em;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .icon-box img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0.5em;
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 1.5em;
+      background-color: #444;
+      color: white;
+      padding: 0.8em 1.5em;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Disaster Preparedness</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <!-- add other links here -->
-    </nav>
-  </header>
 
-  <main>
-    <section style="padding: 2em;">
-      <h2>Prepare. Protect. Survive.</h2>
-      <p>Here’s how to prepare your household for natural disasters like hurricanes, floods, wildfires, and more.</p>
+<header>
+  <h1 style="text-align:center;">Disaster Preparedness</h1>
+  <nav style="text-align:center; margin-bottom: 2em;">
+    <a href="index.html">Home</a> |
+    <a href="disaster-preparedness.html">Disaster Prep</a>
+  </nav>
+</header>
 
-      <ul>
-        <li><strong>Build an Emergency Kit:</strong> Include water, food, flashlight, batteries, first aid, and key documents.</li>
-        <li><strong>Make a Family Plan:</strong> Know evacuation routes, emergency contacts, and meeting points.</li>
-        <li><strong>Secure Your Home:</strong> Reinforce windows, trim trees, and elevate valuables in flood-prone areas.</li>
-        <li><strong>Stay Informed:</strong> Sign up for local alerts and have a battery-powered radio ready.</li>
-      </ul>
+<main style="padding: 2em; max-width: 900px; margin: auto;">
+  <section style="text-align:center;">
+    <h2>Prepare. Protect. Survive.</h2>
+    <p>Follow these essentials to prepare your family and community for hurricanes, floods, fires, and more.</p>
+  </section>
 
-      <p>Need a printable checklist or visual guide? <a href="#">Download Here</a></p>
-    </section>
-  </main>
+  <div class="icon-section">
+    <div class="icon-box">
+      <img src="icons/first-aid.png" alt="First Aid Icon" />
+      <h3>Emergency Kit</h3>
+      <p>Water, food, first-aid, flashlight, and personal items.</p>
+    </div>
+    <div class="icon-box">
+      <img src="icons/family.png" alt="Family Plan Icon" />
+      <h3>Family Plan</h3>
+      <p>Have a communication and meetup plan ready.</p>
+    </div>
+    <div class="icon-box">
+      <img src="icons/home.png" alt="Secure Home Icon" />
+      <h3>Home Safety</h3>
+      <p>Secure windows, anchor furniture, trim trees.</p>
+    </div>
+    <div class="icon-box">
+      <img src="icons/radio.png" alt="Alert Icon" />
+      <h3>Stay Informed</h3>
+      <p>Use battery-powered radios and subscribe to alerts.</p>
+    </div>
+  </div>
 
-  <footer style="text-align:center; padding: 2em 1em;">
-    <p>&copy; 2025 Legion of Human Divinity. All rights reserved.</p>
-  </footer>
+  <div style="text-align:center;">
+    <a class="download-btn" href="checklists/disaster-prep-checklist.pdf" download>
+      Download Printable Checklist
+    </a>
+  </div>
+</main>
+
+<footer style="text-align:center; margin-top: 3em; padding: 2em 1em; background-color: #f9f9f9;">
+  <p>&copy; 2025 Legion of Human Divinity. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
