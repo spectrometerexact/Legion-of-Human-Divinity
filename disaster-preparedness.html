@@ -1,9 +1,11 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Disaster Preparedness | Legion of Human Divinity</title>
+
+  <!-- Font Awesome CDN: must be in head -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -11,88 +13,47 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2em;
-      background-color: #f5f5f5;
-      color: #333;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2em;
-    }
-    p {
-      text-align: center;
-      font-size: 1.2em;
-    }
-    .icon-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2em;
-      margin-top: 2em;
-    }
-    .icon-box {
-      text-align: center;
-      width: 120px;
-    }
-    .icon-box i {
-      font-size: 3em;
-      margin-bottom: 0.5em;
-    }
-    .checklist {
-      text-align: center;
-      margin-top: 2em;
-    }
-    .checklist a {
-      background-color: #007BFF;
-      color: white;
-      padding: 0.8em 1.5em;
-      text-decoration: none;
-      border-radius: 5px;
-    }
+    body { font-family: Arial, sans-serif; background-color: #f7f9fa; margin: 0; padding: 0; color: #333; }
+    header, footer { background-color: #223; color: white; text-align: center; padding: 1em; }
+    main { padding: 2em; max-width: 900px; margin: auto; }
+    h1 { text-align: center; margin-bottom: 0.5em; }
+    p.intro { text-align: center; font-size: 1.2em; margin: 0 auto; }
+    .icon-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2em; margin-top: 2em; }
+    .icon-box { text-align: center; width: 120px; }
+    .icon-box i { font-size: 3em; margin-bottom: 0.5em; color: #007bff; }
+    .checklist { text-align: center; margin-top: 2em; }
+    .checklist a { background-color: #007BFF; color: white; padding: 0.8em 1.5em; text-decoration: none; border-radius: 5px; }
   </style>
 </head>
 <body>
+  <header>
+    <h2>Legion of Human Divinity</h2>
+  </header>
+
   <main>
     <h1>Disaster Preparedness Guide</h1>
-    <p>Be ready before disaster strikes. Here are the essentials every household should have:</p>
+    <p class="intro">Be ready before disaster strikes. Here are the essentials every household should have:</p>
 
     <div class="icon-grid">
-      <div class="icon-box">
-        <i class="fas fa-water" style="color: #007bff;"></i>
-        <p>Water</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-utensils" style="color: #e67e22;"></i>
-        <p>Food</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-first-aid" style="color: #c0392b;"></i>
-        <p>First Aid</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-broadcast-tower" style="color: #27ae60;"></i>
-        <p>Radio</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-lightbulb" style="color: #f1c40f;"></i>
-        <p>Flashlight</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-file-alt" style="color: #8e44ad;"></i>
-        <p>Documents</p>
-      </div>
-      <div class="icon-box">
-        <i class="fas fa-toilet-paper" style="color: #95a5a6;"></i>
-        <p>Hygiene</p>
-      </div>
+      <div class="icon-box"><i class="fas fa-water" style="color:#007bff;"></i><p>Water</p></div>
+      <div class="icon-box"><i class="fas fa-utensils" style="color:#e67e22;"></i><p>Food</p></div>
+      <div class="icon-box"><i class="fas fa-first-aid" style="color:#c0392b;"></i><p>First Aid</p></div>
+      <div class="icon-box"><i class="fas fa-broadcast-tower" style="color:#27ae60;"></i><p>Radio</p></div>
+      <div class="icon-box"><i class="fas fa-lightbulb" style="color:#f1c40f;"></i><p>Flashlight</p></div>
+      <div class="icon-box"><i class="fas fa-file-alt" style="color:#8e44ad;"></i><p>Documents</p></div>
+      <div class="icon-box"><i class="fas fa-toilet-paper" style="color:#95a5a6;"></i><p>Hygiene</p></div>
+      <div class="icon-box"><i class="fas fa-money-bill-wave" style="color:#2c3e50;"></i><p>Cash</p></div>
     </div>
 
     <div class="checklist">
-      <p><a href="/docs/disaster-checklist.pdf" target="_blank">Download Full Checklist (PDF)</a></p>
+      <a href="checklists/disaster-prep-checklist.pdf" target="_blank">Download Full Checklist (PDF)</a>
     </div>
   </main>
+
+  <footer>
+    &copy; 2025 Legion of Human Divinity. All rights reserved.
+  </footer>
 </body>
 </html>
