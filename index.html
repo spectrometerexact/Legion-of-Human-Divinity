@@ -1,117 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Legion of Human Divinity</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-      background-color: #1a0a3d;
-    }
-    header {
-      background: url('hero-background.jpg') center/cover no-repeat;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      top:0; left:0; width:100%; height:100%;
-      background: rgba(26,10,61,0.6);
-    }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3em;
-      z-index: 1;
-      margin: 0 20px;
-    }
-    .cta-buttons {
-      margin-top: 20px;
-      z-index: 1;
-    }
-    .cta-buttons a {
-      text-decoration: none;
-      padding: 15px 30px;
-      margin: 10px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .member-btn {
-      background-color: #ffcd00;
-      color: #1a0a3d;
-    }
-    .donate-btn {
-      background-color: #fff;
-      color: #1a0a3d;
-    }
-    .cta-buttons a:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 205, 0, 0.7);
-    }
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .icons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-top: 40px;
-    }
-    .icon-item {
-      width: 150px;
-    }
-    .icon-item img {
-      width: 100%;
-      filter: drop-shadow(0 0 10px #ffcd00);
-    }
-    footer {
-      background-color: #0d0420;
-      padding: 20px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #ccc;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Legion of Human Divinity</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-1:#0d0821;          /* deep indigo */
+    --bg-2:#1a1039;          /* purple tint */
+    --ink:#f7eed9;           /* warm ivory text */
+    --muted:#e8dcc0;         /* slightly dimmer ivory */
+    --gold:#c79a2d;          /* button fill */
+    --gold-2:#b5861f;        /* button hover */
+    --line:rgba(247,238,217,0.15);
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+    --radius:14px;
+  }
+
+  /* Reset-ish */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.04), transparent 60%),
+      radial-gradient(900px 600px at 50% 0%, rgba(199,154,45,.08), transparent 50%),
+      radial-gradient(1200px 900px at 50% 10%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(900px 900px at 50% 30%, rgba(199,154,45,.08), transparent 60%),
+      linear-gradient(180deg, var(--bg-2), var(--bg-1) 40%, #0a0717 100%);
+    font-family: "Crimson Text", serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px}
+
+  /* Top nav (two links in corners) */
+  .topbar{
+    position:fixed; inset:0 0 auto 0; height:72px; z-index:40;
+    background:linear-gradient(to bottom, rgba(0,0,0,.35), transparent);
+    pointer-events:none;
+  }
+  .topbar a{
+    position:absolute; top:18px; font-size:18px;
+    padding:8px 14px; border-radius:999px; border:1px solid var(--line);
+    color:var(--muted);
+    backdrop-filter:blur(6px);
+    pointer-events:auto;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .topbar a:hover{transform:translateY(-1px); border-color:rgba(247,238,217,.35); background:rgba(255,255,255,.03)}
+  .topbar .donate-link{left:22px}
+  .topbar .member-link{right:22px}
+
+  /* Hero */
+  .hero{padding-top:128px; padding-bottom:36px; text-align:center}
+  .title{
+    font-family:"Cinzel", serif;
+    font-weight:900; letter-spacing:.06em;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height:1.1; margin:48px 0 14px;
+  }
+  .subtitle{
+    font-size: clamp(18px, 2.2vw, 24px);
+    color:var(--muted);
+    margin:0 auto 28px;
+    max-width:900px;
+  }
+
+  .cta-row{
+    display:flex; gap:22px; justify-content:center; align-items:center;
+    margin:28px 0 10px;
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:16px 28px; border-radius:12px; border:1px solid rgba(199,154,45,.35);
+    font-weight:700; letter-spacing:.02em; cursor:pointer; user-select:none;
+    box-shadow:var(--shadow); transition:transform .1s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(180deg, var(--gold), var(--gold-2));
+    color:#241500;
+  }
+  .btn-ghost{
+    background:transparent; color:var(--ink);
+    border:1px solid rgba(247,238,217,.25);
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn-primary:hover{filter:saturate(105%) brightness(1.02)}
+  .btn-ghost:hover{background:rgba(255,255,255,.04)}
+
+  /* Section headings */
+  h2.section-h{
+    font-family:"Cinzel", serif; font-weight:800;
+    font-size: clamp(30px, 3.5vw, 42px);
+    text-align:center; margin:64px 0 26px;
+  }
+
+  /* About icons row */
+  .about{
+    margin-top:18px;
+  }
+  .about-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .about-card{
+    text-align:center; padding:10px 18px;
+  }
+  .icon-wrap{
+    width:72px; height:72px; border-radius:50%; margin:0 auto 14px;
+    display:grid; place-items:center;
+    border:1px solid var(--line); background:rgba(255,255,255,.02);
+    box-shadow:inset 0 0 0 6px rgba(255,255,255,.01);
+  }
+  .about-card p{max-width:320px; margin:0 auto; color:var(--muted); font-size:18px}
+
+  /* Video row */
+  .video-grid{
+    margin:30px 0 8px;
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+  }
+  .video-thumb{
+    position:relative; border-radius:14px; overflow:hidden;
+    aspect-ratio: 16/9; background:
+      linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.35)),
+      url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+    border:1px solid var(--line);
+  }
+  .video-thumb:nth-child(2){
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.35)),
+      url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  }
+  .play{
+    position:absolute; inset:auto auto 18px 18px;
+    width:64px; height:64px; border-radius:50%;
+    display:grid; place-items:center;
+    background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.35);
+    backdrop-filter:blur(4px);
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .video-thumb:hover .play{transform:scale(1.03); background:rgba(0,0,0,.45); border-color:rgba(255,255,255,.55)}
+
+  /* Form */
+  .join{
+    margin:44px auto 84px; max-width:860px;
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .form{
+    margin-top:14px; padding:22px; border:1px solid var(--line); border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    box-shadow:var(--shadow);
+  }
+  .form-grid{
+    display:grid; grid-template-columns:200px 1fr; gap:16px 18px; align-items:center;
+  }
+  .form label{justify-self:end; color:var(--muted); font-size:19px}
+  .form input, .form textarea{
+    width:100%; padding:14px 16px; border-radius:10px;
+    border:1px solid rgba(247,238,217,.22);
+    background:rgba(10,7,23,.55); color:var(--ink); font-size:18px;
+    outline:none; transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .form textarea{min-height:110px; resize:vertical}
+  .form input:focus, .form textarea:focus{border-color:rgba(199,154,45,.55); box-shadow:0 0 0 3px rgba(199,154,45,.18)}
+  .actions{grid-column:2}
+  .submit-btn{
+    display:inline-block; width:160px; text-align:center;
+    padding:12px 18px; border-radius:10px; border:1px solid rgba(199,154,45,.45);
+    background:linear-gradient(180deg, var(--gold), var(--gold-2)); color:#241500;
+    font-weight:700; letter-spacing:.02em; cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+
+  /* Small screens */
+  @media (max-width: 860px){
+    .about-grid{grid-template-columns:1fr}
+    .video-grid{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr; }
+    .form label{justify-self:start}
+    .topbar a{font-size:16px}
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Awakening the Divine Potential Within All People</h1>
-    <div class="cta-buttons">
-      <a href="membership.html" class="member-btn">Become a Member</a>
-      <a href="donate.html" class="donate-btn">Donate Now</a>
-    </div>
-  </header>
 
-  <section id="icons">
-    <h2>Our Pillars</h2>
-    <div class="icons">
-      <div class="icon-item"><img src="community-icon.png" alt="Community"></div>
-      <div class="icon-item"><img src="growth-icon.png" alt="Spiritual Growth"></div>
-      <div class="icon-item"><img src="cost-icon.png" alt="Reduce Living Cost"></div>
+<!-- Fixed corner links -->
+<nav class="topbar">
+  <a class="donate-link" href="https://example.com/donate" target="_blank" rel="noopener">Donate</a>
+  <a class="member-link" href="#join">Become a Member</a>
+</nav>
+
+<header class="hero wrap" id="top">
+  <h1 class="title">LEGION OF HUMAN<br/>DIVINITY</h1>
+  <p class="subtitle">Awakening the Divine Potential Within All People</p>
+
+  <div class="cta-row">
+    <a class="btn btn-ghost" href="#join">Become a Member</a>
+    <a class="btn btn-primary" href="https://example.com/donate" target="_blank" rel="noopener">Donate Now</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="about">
+    <h2 class="section-h">About Us</h2>
+
+    <div class="about-grid">
+      <!-- Card 1 -->
+      <div class="about-card">
+        <div class="icon-wrap" aria-hidden="true">
+          <!-- Coin icon -->
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+            <path d="M8 12c0-1.7 1.8-3 4-3s4 .8 4 2-1.2 2-3 2-3 .6-3 2 1.7 2 3 2 3-.8 3-2" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p>Our mission is reduce the cost of living expenses.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="about-card">
+        <div class="icon-wrap" aria-hidden="true">
+          <!-- Community icon -->
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+            <circle cx="7.5" cy="9" r="2.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+            <circle cx="16.5" cy="9" r="2.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+            <path d="M3.5 18c.9-2.6 3.1-4 6-4s5.1 1.4 6 4M8.5 18c.7-1.9 2.4-3 4.5-3 2.2 0 3.8 1.1 4.5 3" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p>We foster community support and cooperation.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="about-card">
+        <div class="icon-wrap" aria-hidden="true">
+          <!-- Sun icon -->
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="3.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+            <g stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round">
+              <path d="M12 2.5v2.5M12 19v2.5M4.5 12H2M22 12h-2.5M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8"/>
+            </g>
+          </svg>
+        </div>
+        <p>We seek spiritual growth through unity and shared divinity.</p>
+      </div>
+    </div>
+
+    <!-- Videos -->
+    <div class="video-grid">
+      <a class="video-thumb" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">
+        <span class="play" aria-label="Play video">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.8)" stroke-width="1.6"/>
+            <path d="M10 8.5 16 12l-6 3.5V8.5Z" fill="rgba(255,255,255,.85)"/>
+          </svg>
+        </span>
+      </a>
+
+      <a class="video-thumb" href="https://www.youtube.com/watch?v=oHg5SJYRHA0" target="_blank" rel="noopener">
+        <span class="play" aria-label="Play video">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.8)" stroke-width="1.6"/>
+            <path d="M10 8.5 16 12l-6 3.5V8.5Z" fill="rgba(255,255,255,.85)"/>
+          </svg>
+        </span>
+      </a>
     </div>
   </section>
 
-  <section id="video">
-    <h2>Our Message</h2>
-    <p>Placeholder for embedded video</p>
-    <!-- Replace below with embedded video iframe -->
-    <!-- <iframe src="VIDEO_URL" width="560" height="315" frameborder="0" allowfullscreen></iframe> -->
-  </section>
+  <!-- Join form -->
+  <section id="join" class="join">
+    <h2 class="section-h">Become a Member</h2>
 
-  <footer>
-    © 2025 Legion of Human Divinity. All rights reserved.
-  </footer>
+    <form class="form" onsubmit="return handleSubmit(event)">
+      <div class="form-grid">
+        <label for="name">Name</label>
+        <input id="name" name="name" placeholder="Your full name" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+        <label for="why">Why do you want to join?</label>
+        <textarea id="why" name="why" placeholder="Share your reasons..."></textarea>
+
+        <div class="actions">
+          <button class="submit-btn" type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+
+<script>
+  // Smooth scroll for internal links (Become a Member buttons)
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        history.pushState(null, '', '#' + id);
+      }
+    });
+  });
+
+  // Simple demo submit handler
+  function handleSubmit(e){
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    alert(
+      "Thanks for joining!\n\n" +
+      "Name: " + (data.name || "") + "\n" +
+      "Email: " + (data.email || "") + "\n" +
+      "Why: " + (data.why || "")
+    );
+    e.target.reset();
+    return false;
+  }
+</script>
 </body>
 </html>
