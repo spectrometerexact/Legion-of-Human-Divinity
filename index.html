@@ -151,38 +151,38 @@
   }
   .video-thumb:hover .play{transform:scale(1.03); background:rgba(0,0,0,.45); border-color:rgba(255,255,255,.55)}
 
-  /* Form */
-  .join{
-    margin:44px auto 84px; max-width:860px;
-    border-top:1px solid var(--line);
-    padding-top:18px;
-  }
-  .form{
-    margin-top:14px; padding:22px; border:1px solid var(--line); border-radius:16px;
-    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-    box-shadow:var(--shadow);
-  }
-  .form-grid{
-    display:grid; grid-template-columns:200px 1fr; gap:16px 18px; align-items:center;
-  }
-  .form label{justify-self:end; color:var(--muted); font-size:19px}
-  .form input, .form textarea{
-    width:100%; padding:14px 16px; border-radius:10px;
-    border:1px solid rgba(247,238,217,.22);
-    background:rgba(10,7,23,.55); color:var(--ink); font-size:18px;
-    outline:none; transition:border-color .15s ease, box-shadow .15s ease;
-  }
-  .form textarea{min-height:110px; resize:vertical}
-  .form input:focus, .form textarea:focus{border-color:rgba(199,154,45,.55); box-shadow:0 0 0 3px rgba(199,154,45,.18)}
-  .actions{grid-column:2}
-  .submit-btn{
-    display:inline-block; width:160px; text-align:center;
-    padding:12px 18px; border-radius:10px; border:1px solid rgba(199,154,45,.45);
-    background:linear-gradient(180deg, var(--gold), var(--gold-2)); color:#241500;
-    font-weight:700; letter-spacing:.02em; cursor:pointer;
-    box-shadow:var(--shadow);
-  }
+    <!-- Donate section -->
+  <section id="donate" class="join">
+    <h2 class="section-h">Support Our Mission</h2>
 
+    <div style="text-align:center; margin-top:24px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+      <!-- $5 Stripe donation link -->
+      <a class="btn btn-primary" href="https://buy.stripe.com/eVq5kDe0Uczs22K5jM97G00" target="_blank" rel="noopener">
+        Donate $5
+      </a>
+
+      <!-- $20 Stripe donation link -->
+      <a class="btn btn-primary" href="https://buy.stripe.com/fZubJ1cWQ570gXEh2u97G01" target="_blank" rel="noopener">
+        Donate $20
+      </a>
+
+      <!-- $50 Stripe donation link -->
+      <a class="btn btn-primary" href="https://buy.stripe.com/28EaEXf4Y1UOazg5jM97G02" target="_blank" rel="noopener">
+        Donate $50
+      </a>
+
+      <!-- $100 Stripe donation link -->
+      <a class="btn btn-primary" href="https://buy.stripe.com/8x2bJ14qk42W7n45jM97G03" target="_blank" rel="noopener">
+        Donate $100
+      </a>
+
+      <!-- Custom Stripe donation link -->
+      <a class="btn btn-ghost" href="https://buy.stripe.com/00w8wP1e87f822KdQi97G04" target="_blank" rel="noopener">
+        Custom Amount
+      </a>
+    </div>
+  </section>
+</main>
   /* Small screens */
   @media (max-width: 860px){
     .about-grid{grid-template-columns:1fr}
