@@ -1,121 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Become a Member | Legion of Human Divinity</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #223;
-      color: #fff;
-      padding: 1em;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 1em;
-      text-decoration: none;
-    }
-    main {
-      max-width: 600px;
-      margin: 2em auto;
-      background: #fff;
-      padding: 2em;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 1em;
-    }
-    form label {
-      display: block;
-      margin-top: 1em;
-      font-weight: bold;
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 0.75em;
-      margin-top: 0.25em;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    form textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-    form button {
-      display: block;
-      margin: 2em auto 0;
-      padding: 0.8em 2em;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    form button:hover {
-      background-color: #0056b3;
-    }
-    footer {
-      background: #223;
-      color: #fff;
-      text-align: center;
-      padding: 1em;
-      margin-top: 2em;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Membership – Legion of Human Divinity</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin:0; padding:0;
+    font-family:"Crimson Text", serif;
+    background:linear-gradient(180deg,#1a1039,#0d0821);
+    color:#f7eed9;
+    line-height:1.6;
+  }
+  .wrap{max-width:900px; margin:0 auto; padding:40px 24px;}
+  h1 {
+    font-family:"Cinzel", serif;
+    font-weight:900;
+    text-align:center;
+    font-size:42px;
+    margin-bottom:20px;
+  }
+  p {
+    font-size:20px;
+    margin-bottom:18px;
+  }
+  .btn {
+    display:inline-block;
+    padding:14px 26px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:700;
+    margin-top:20px;
+  }
+  .btn-primary {
+    background:linear-gradient(180deg,#c79a2d,#b5861f);
+    color:#241500;
+  }
+  .center{text-align:center;}
+</style>
 </head>
 <body>
+  <div class="wrap">
+    <h1>Membership Benefits</h1>
+    <p>By becoming a member of the <strong>Legion of Human Divinity</strong>, you gain access to exclusive resources, community support, and opportunities to take part in initiatives that help reduce the burden of everyday living costs.</p>
+    <p>✨ Benefits include:</p>
+    <ul>
+      <li>Access to members-only community gatherings and events</li>
+      <li>Early updates on new initiatives and projects</li>
+      <li>Direct involvement in shaping the future direction of our mission</li>
+      <li>Opportunities to connect with like-minded individuals</li>
+    </ul>
 
-  <header>
-    <h2>Legion of Human Divinity</h2>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="membership.html">Become a Member</a>
-      <a href="disaster-preparedness.html">Disaster Prep</a>
-    </nav>
-  </header>
-
-  <main>
-    <h1>Become a Member</h1>
-    <p style="text-align:center;">
-      Join our spiritual community and help awaken the divine within.
-    </p>
-
-    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="_replyto" required />
-
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" />
-
-      <label for="reason">Why do you want to join?</label>
-      <textarea id="reason" name="reason" placeholder="Tell us what inspires you..." required></textarea>
-
-      <!-- Redirect to a thank-you page after submit -->
-      <input type="hidden" name="_next" value="thankyou.html" />
-
-      <button type="submit">Submit Membership Application</button>
-    </form>
-  </main>
-
-  <footer>
-    &copy; 2025 Legion of Human Divinity. All rights reserved.
-  </footer>
-
+    <div class="center">
+      <!-- Optional: Add Stripe link for membership fee -->
+      <a class="btn btn-primary" href="https://example.com/membership-stripe-link" target="_blank">Join Now</a>
+    </div>
+  </div>
 </body>
 </html>
