@@ -1,229 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Legion of Human Divinity</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legion of Human Divinity</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-<style>
-  :root{
-    --bg-1:#0d0821;
-    --bg-2:#1a1039;
-    --ink:#f7eed9;
-    --muted:#e8dcc0;
-    --gold:#c79a2d;
-    --gold-2:#b5861f;
-    --line:rgba(247,238,217,0.15);
-    --shadow:0 10px 30px rgba(0,0,0,.45);
-  }
-
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    color:var(--ink);
-    background:
-      radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.04), transparent 60%),
-      radial-gradient(900px 600px at 50% 0%, rgba(199,154,45,.08), transparent 50%),
-      radial-gradient(1200px 900px at 50% 10%, rgba(255,255,255,.06), transparent 60%),
-      radial-gradient(900px 900px at 50% 30%, rgba(199,154,45,.08), transparent 60%),
-      linear-gradient(180deg, var(--bg-2), var(--bg-1) 40%, #0a0717 100%);
-    font-family: "Crimson Text", serif;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-
-  a{color:inherit; text-decoration:none}
-  .wrap{max-width:1120px; margin:0 auto; padding:0 24px}
-
-  /* Hero */
-  .hero{padding-top:128px; padding-bottom:36px; text-align:center}
-  .title{
-    font-family:"Cinzel", serif;
-    font-weight:900; letter-spacing:.06em;
-    font-size: clamp(36px, 5vw, 60px);
-    line-height:1.1; margin:48px 0 14px;
-  }
-  .subtitle{
-    font-size: clamp(18px, 2.2vw, 24px);
-    color:var(--muted);
-    margin:0 auto 28px;
-    max-width:900px;
-  }
-  .cta-row{
-    display:flex; gap:22px; justify-content:center; align-items:center;
-    margin:28px 0 10px;
-  }
-
-  /* Buttons */
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:16px 28px; border-radius:12px; border:1px solid rgba(199,154,45,.35);
-    font-weight:700; letter-spacing:.02em; cursor:pointer;
-    box-shadow:var(--shadow); transition:transform .1s ease, background .2s ease;
-  }
-  .btn-primary{
-    background:linear-gradient(180deg, var(--gold), var(--gold-2));
-    color:#241500;
-  }
-  .btn-ghost{
-    background:transparent; color:var(--ink);
-    border:1px solid rgba(247,238,217,.25);
-  }
-  .btn:hover{transform:translateY(-1px)}
-  .btn:active{transform:translateY(0)}
-
-  /* Section heading */
-  h2.section-h{
-    font-family:"Cinzel", serif; font-weight:800;
-    font-size: clamp(30px, 3.5vw, 42px);
-    text-align:center; margin:64px 0 26px;
-  }
-
-  /* About */
-  .about{margin-top:18px;}
-  .about-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
-  .about-card{text-align:center; padding:10px 18px;}
-  .icon-wrap{
-    width:72px; height:72px; border-radius:50%; margin:0 auto 14px;
-    display:grid; place-items:center;
-    border:1px solid var(--line); background:rgba(255,255,255,.02);
-    box-shadow:inset 0 0 0 6px rgba(255,255,255,.01);
-  }
-  .about-card p{max-width:320px; margin:0 auto; color:var(--muted); font-size:18px}
-
-  /* Videos */
-  .video-grid{
-    margin:30px 0 8px;
-    display:grid; grid-template-columns:1fr 1fr; gap:28px;
-  }
-  .video-thumb{
-    position:relative; border-radius:14px; overflow:hidden;
-    aspect-ratio: 16/9;
-    background:linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.35)),
-      url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-    border:1px solid var(--line);
-  }
-  .video-thumb:nth-child(2){
-    background:linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.35)),
-      url('https://images.unsplash.com/photo-1501973801540-537f08ccae7b?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
-  }
-  .play{
-    position:absolute; bottom:18px; left:18px;
-    width:64px; height:64px; border-radius:50%;
-    display:grid; place-items:center;
-    background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.35);
-  }
-
-  /* Donate + Contact */
-  .join{
-    margin:64px auto 32px;
-    max-width:860px; border-top:1px solid var(--line); padding-top:24px;
-  }
-  .contact{
-    max-width:860px;
-    margin:0 auto 90px;
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:22px;
-    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-  }
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
-  .contact-item{display:flex; gap:12px; align-items:center; padding:12px 10px;
-    border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02);}
-  .contact a{color:var(--muted); text-decoration:underline dotted rgba(247,238,217,.4)}
-  .contact small{color:var(--muted); opacity:.8}
-
-  @media (max-width: 860px){
-    .about-grid{grid-template-columns:1fr}
-    .video-grid{grid-template-columns:1fr}
-    .contact-grid{grid-template-columns:1fr}
-  }
-</style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header class="hero wrap" id="top">
-  <h1 class="title">LEGION OF HUMAN<br/>DIVINITY</h1>
-  <p class="subtitle">Awakening the Divine Potential Within All People</p>
+  <!-- HERO -->
+  <header class="hero wrap" id="top">
+    <h1 class="title gold-shine">
+      LEGION <br/>
+      <span class="of of-A">of</span> <br/>
+      HUMAN DIVINITY
+    </h1>
+    <p class="subtitle">Awakening the Divine Potential Within All People</p>
 
-  <div class="cta-row">
-    <a class="btn btn-ghost" href="membership.html">Become a Member</a>
-    <a class="btn btn-primary" href="#donate">Donate</a>
-  </div>
-</header>
+    <div class="cta-row">
+      <a class="btn btn-ghost" href="membership.html">Become a Member</a>
+      <a class="btn btn-primary" href="#donate">Donate</a>
+    </div>
+  </header>
 
-<main class="wrap">
-  <section class="about" id="about">
-    <h2 class="section-h">About Us</h2>
+  <main class="wrap">
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <h2 class="section-h">About Us</h2>
 
-    <div class="about-grid">
-      <div class="about-card">
-        <div class="icon-wrap">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="9" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
-            <path d="M8 12c0-1.7 1.8-3 4-3s4 .8 4 2-1.2 2-3 2-3 .6-3 2 1.7 2 3 2 3-.8 3-2" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <div class="about-grid">
+        <!-- 1 -->
+        <div class="about-card">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Coin icon -->
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+              <path d="M8 12c0-1.7 1.8-3 4-3s4 .8 4 2-1.2 2-3 2-3 .6-3 2 1.7 2 3 2 3-.8 3-2" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Our mission is reduce the cost of living expenses.</p>
         </div>
-        <p>Our mission is reduce the cost of living expenses.</p>
-      </div>
-      <div class="about-card">
-        <div class="icon-wrap">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
-            <circle cx="7.5" cy="9" r="2.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
-            <circle cx="16.5" cy="9" r="2.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
-            <path d="M3.5 18c.9-2.6 3.1-4 6-4s5.1 1.4 6 4M8.5 18c.7-1.9 2.4-3 4.5-3 2.2 0 3.8 1.1 4.5 3" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round"/>
-          </svg>
+
+        <!-- 2 -->
+        <div class="about-card">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Community icon -->
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+              <circle cx="7.5" cy="9" r="2.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+              <circle cx="16.5" cy="9" r="2.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+              <path d="M3.5 18c.9-2.6 3.1-4 6-4s5.1 1.4 6 4M8.5 18c.7-1.9 2.4-3 4.5-3 2.2 0 3.8 1.1 4.5 3" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p>We foster community support and cooperation.</p>
         </div>
-        <p>We foster community support and cooperation.</p>
-      </div>
-      <div class="about-card">
-        <div class="icon-wrap">
-          <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="3.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
-            <g stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round">
-              <path d="M12 2.5v2.5M12 19v2.5M4.5 12H2M22 12h-2.5M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8"/>
-            </g>
-          </svg>
+
+        <!-- 3 -->
+        <div class="about-card">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Sun icon -->
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+              <g stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round">
+                <path d="M12 2.5v2.5M12 19v2.5M4.5 12H2M22 12h-2.5M5.2 5.2l1.8 1.8M17 17l1.8 1.8M18.8 5.2 17 7M7 17l-1.8 1.8"/>
+              </g>
+            </svg>
+          </div>
+          <p>We seek spiritual growth through unity and shared divinity.</p>
         </div>
-        <p>We seek spiritual growth through unity and shared divinity.</p>
       </div>
-    </div>
 
-    <div class="video-grid">
-      <a class="video-thumb" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><span class="play">▶</span></a>
-      <a class="video-thumb" href="https://www.youtube.com/watch?v=oHg5SJYRHA0" target="_blank"><span class="play">▶</span></a>
-    </div>
-  </section>
+      <!-- VIDEOS -->
+      <div class="video-grid">
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener">
+          <span class="play">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.8)" stroke-width="1.6"/>
+              <path d="M10 8.5 16 12l-6 3.5V8.5Z" fill="rgba(255,255,255,.85)"/>
+            </svg>
+          </span>
+        </a>
 
-  <!-- Donate section -->
-  <section id="donate" class="join">
-    <h2 class="section-h">Support Our Mission</h2>
-    <div style="text-align:center; margin-top:24px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-      <a class="btn btn-primary" href="https://buy.stripe.com/eVq5kDe0Uczs22K5jM97G00" target="_blank">Donate $5</a>
-      <a class="btn btn-primary" href="https://buy.stripe.com/fZubJ1cWQ570gXEh2u97G01" target="_blank">Donate $20</a>
-      <a class="btn btn-primary" href="https://buy.stripe.com/28EaEXf4Y1UOazg5jM97G02" target="_blank">Donate $50</a>
-      <a class="btn btn-primary" href="https://buy.stripe.com/8x2bJ14qk42W7n45jM97G03" target="_blank">Donate $100</a>
-      <a class="btn btn-ghost" href="https://buy.stripe.com/00w8wP1e87f822KdQi97G04" target="_blank">Custom Amount</a>
-    </div>
-  </section>
-
-  <!-- Contact section -->
-  <section class="contact" id="contact">
-    <h2 class="section-h" style="margin-top:16px;">Contact</h2>
-    <div class="contact-grid">
-      <div class="contact-item">
-        ✉️ <div><a href="mailto:info@humandivinity.com">info@humandivinity.com</a><br><small>We’ll get back to you soon.</small></div>
+        <a class="video-thumb" href="https://www.youtube.com/watch?v=oHg5SJYRHA0" target="_blank" rel="noopener">
+          <span class="play">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,.8)" stroke-width="1.6"/>
+              <path d="M10 8.5 16 12l-6 3.5V8.5Z" fill="rgba(255,255,255,.85)"/>
+            </svg>
+          </span>
+        </a>
       </div>
-      <div class="contact-item">
-        📘 <div><a href="#" onclick="return false;">Facebook Page (coming soon)</a><br><small>Link will be updated once published.</small></div>
+    </section>
+
+    <!-- DONATE -->
+    <section id="donate" class="join">
+      <h2 class="section-h">Support Our Mission</h2>
+
+      <div class="donate-row">
+        <a class="btn btn-primary" href="https://buy.stripe.com/eVq5kDe0Uczs22K5jM97G00" target="_blank" rel="noopener">Donate $5</a>
+        <a class="btn btn-primary" href="https://buy.stripe.com/fZubJ1cWQ570gXEh2u97G01" target="_blank" rel="noopener">Donate $20</a>
+        <a class="btn btn-primary" href="https://buy.stripe.com/28EaEXf4Y1UOazg5jM97G02" target="_blank" rel="noopener">Donate $50</a>
+        <a class="btn btn-primary" href="https://buy.stripe.com/8x2bJ14qk42W7n45jM97G03" target="_blank" rel="noopener">Donate $100</a>
+        <a class="btn btn-ghost"   href="https://buy.stripe.com/00w8wP1e87f822KdQi97G04" target="_blank" rel="noopener">Custom Amount</a>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <h2 class="section-h" style="margin-top:16px;">Contact</h2>
+      <div class="contact-grid">
+        <!-- Email -->
+        <div class="contact-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+            <path d="M4 7.5 12 12l8-4.5" stroke="rgba(247,238,217,.8)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div><a href="mailto:info@humandivinity.com">info@humandivinity.com</a></div>
+            <small>We’ll get back to you soon.</small>
+          </div>
+        </div>
+
+        <!-- Facebook placeholder -->
+        <div class="contact-item">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="rgba(247,238,217,.8)" stroke-width="1.6"/>
+            <path d="M13 8.5h2V7h-2c-1.7 0-3 1.3-3 3v1H8.5V13H10v4h2v-4h2l.5-2H12v-1c0-.6.4-1 1-1Z" fill="rgba(247,238,217,.85)"/>
+          </svg>
+          <div>
+            <div><a href="#" aria-disabled="true" onclick="return false;">Facebook Page (coming soon)</a></div>
+            <small>Link will be updated once published.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
 </body>
 </html>
