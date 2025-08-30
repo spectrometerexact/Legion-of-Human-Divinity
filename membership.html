@@ -1,93 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legion of Human Divinity - Membership</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f9f9f9;
-            color: #222;
-            text-align: center;
-            padding: 50px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Membership • Legion of Human Divinity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#2c003e;     /* deep indigo */
+      --bg2:#4b0082;     /* royal purple */
+      --ink:#f5f5f5;     /* light text */
+      --muted:#d9d9df;
+      --gold:#ffd700;    /* gold accent */
+      --card:#2a1a5d;    /* card purple */
+      --shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+    }
 
-        h1 {
-            color: #4b0082;
-            margin-bottom: 40px;
-        }
+    /* Top bar */
+    .top{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:16px 28px;background:rgba(13,4,32,.55);backdrop-filter:blur(6px);
+      position:sticky;top:0;z-index:10;border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .brand{font-family:'Playfair Display',serif;font-weight:700;letter-spacing:.3px}
+    .brand a{color:var(--ink);text-decoration:none}
+    .top a.btn-link{color:var(--ink);opacity:.85;text-decoration:none}
+    .top a.btn-link:hover{opacity:1;text-decoration:underline}
 
-        .membership-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 50px;
-        }
+    /* Hero */
+    .hero{
+      text-align:center;padding:60px 20px 30px;
+    }
+    .hero h1{
+      font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(28px,4vw,44px);margin:0 0 10px;text-shadow:2px 2px 10px rgba(0,0,0,.35)
+    }
+    .hero p{max-width:820px;margin:8px auto 22px;color:var(--muted);font-size:clamp(14px,2.2vw,18px)}
 
-        .membership-buttons a {
-            display: inline-block;
-            padding: 20px 40px;
-            font-size: 20px;
-            color: #fff;
-            background: linear-gradient(135deg, #6a0dad, #8a2be2);
-            border-radius: 12px;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+    /* Buttons row */
+    .membership-buttons{
+      display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:22px 0 8px;
+    }
+    .membership-buttons a{
+      display:inline-block;padding:16px 28px;border-radius:12px;
+      font-weight:700;text-decoration:none;color:#1a0a3d;
+      background:linear-gradient(135deg,#8e44ad,var(--gold));
+      box-shadow:var(--shadow);
+      transition:transform .2s ease, box-shadow .2s ease, filter .2s ease, background .3s ease;
+      white-space:nowrap;
+    }
+    .membership-buttons a:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(0,0,0,.45);
+      filter:saturate(1.1);
+      background:linear-gradient(135deg,var(--gold),#8e44ad);
+    }
 
-        .membership-buttons a:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
+    /* Grid */
+    .wrap{max-width:1100px;margin:0 auto;padding:18px 20px 60px}
+    .grid{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:26px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr;gap:18px} }
 
-        .benefits {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: left;
-        }
+    /* Cards */
+    .card{
+      background:linear-gradient(180deg,rgba(42,26,93,.92),rgba(30,16,70,.92));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;padding:26px;box-shadow:var(--shadow)
+    }
+    .card h2{
+      margin:0 0 10px;font-family:'Playfair Display',serif;
+      font-size:clamp(22px,3.2vw,28px);color:var(--gold);text-shadow:1px 1px 6px rgba(0,0,0,.35)
+    }
+    .card p.sub{margin:6px 0 20px;color:var(--muted)}
+    .benefit-group{margin:18px 0 8px}
+    .benefit-group h3{
+      margin:20px 0 8px;font-size:18px;color:var(--gold);font-weight:700
+    }
+    ul.benefits{margin:0;padding-left:18px}
+    ul.benefits li{margin:8px 0;color:var(--ink)}
 
-        .benefits h2 {
-            color: #4b0082;
-            margin-top: 40px;
-            margin-bottom: 10px;
-        }
+    /* Form */
+    form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:680px){ form .row{grid-template-columns:1fr} }
+    label{font-weight:600;margin:10px 0 6px;display:block}
+    input,select,textarea{
+      width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);color:var(--ink);outline:none;
+    }
+    textarea{min-height:110px;resize:vertical}
+    .helper{font-size:13px;color:var(--muted);margin-top:6px}
 
-        .benefits ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
+    .submit{
+      margin-top:16px;width:100%;padding:14px 18px;border:0;border-radius:12px;
+      background:linear-gradient(135deg,#8e44ad,var(--gold));color:#1a0a3d;
+      font-weight:800;letter-spacing:.2px;cursor:pointer;box-shadow:var(--shadow);
+      transition:transform .2s ease, box-shadow .2s ease, background .3s ease;
+    }
+    .submit:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(0,0,0,.45)}
 
-        .benefits li {
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-    </style>
+    /* Footer */
+    footer{text-align:center;color:var(--muted);padding:28px 16px;border-top:1px solid rgba(255,255,255,.08)}
+    footer a{color:var(--gold);text-decoration:none}
+    footer a:hover{text-decoration:underline}
+  </style>
 </head>
 <body>
-    <h1>Become a Member of the Legion of Human Divinity</h1>
 
+  <!-- Top bar -->
+  <div class="top">
+    <div class="brand"><a href="index.html">Legion of Human Divinity</a></div>
+    <a class="btn-link" href="index.html">← Back to Home</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Become a Member</h1>
+    <p>Choose your monthly path and stand with us in awakening the divine potential of humanity through The Universal Consciousness (TUC).</p>
+
+    <!-- Stripe buttons -->
     <div class="membership-buttons">
-        <a href="https://donate.stripe.com/00w7sLg92eHA5eW27A97G05>$25 - Membership</a>
-        <a href="https://buy.stripe.com/8x2bJ14qk42W7n45jM97G03">$100 - MAX MEMBER</a>
+      <a href="https://donate.stripe.com/00w7sLg92eHA5eW27A97G05" target="_blank">$25 / mo. — Membership</a>
+      <a href="https://buy.stripe.com/8x2bJ14qk42W7n45jM97G03" target="_blank">$100 / mo. — MAX MEMBER</a>
     </div>
+  </section>
 
-    <div class="benefits">
-        <h2>Membership Benefits ($25)</h2>
-        <ul>
+  <div class="wrap">
+    <div class="grid">
+      <!-- Benefits -->
+      <div class="card">
+        <h2>Membership Benefits</h2>
+        <p class="sub">Clarity, community, and contribution—aligned with TUC.</p>
+
+        <div class="benefit-group">
+          <h3>$25 / mo. — Membership</h3>
+          <ul class="benefits">
             <li>Support the advancement of the human experience</li>
-            <li>Access to monthly newsletters</li>
-            <li>Direct involvement via our Discord meetings</li>
-        </ul>
+            <li>Access to monthly newsletters and updates</li>
+            <li><strong>Direct involvement via our Discord meetings</strong></li>
+          </ul>
+        </div>
 
-        <h2>MAX MEMBER Benefits ($100)</h2>
-        <ul>
+        <div class="benefit-group">
+          <h3>$100 / mo. — MAX MEMBER</h3>
+          <ul class="benefits">
             <li>All standard Membership benefits</li>
-            <li>Exclusive access to our Bug Out Crew</li>
-            <li>Priority participation in special events</li>
-            <li>Direct involvement via our Discord meetings</li>
-        </ul>
+            <li><strong>Exclusive access to our Bug Out Crew</strong></li>
+            <li>Priority participation in special events & projects</li>
+            <li><strong>Direct involvement via our Discord meetings</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sign-up Form -->
+      <div class="card">
+        <h2>Membership Sign-Up Sheet</h2>
+        <p class="sub">Complete this form so we can welcome you and connect you to the community.</p>
+
+        <!-- FormSubmit emails this to your inbox. Replace email if needed. -->
+        <form action="https://formsubmit.co/info@humandivinity.com" method="POST">
+          <!-- FormSubmit helpers -->
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_subject" value="New Membership — Legion of Human Divinity">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_autoresponse"
+                 value="Thank you for joining the Legion of Human Divinity. This confirms your membership submission. For monthly contributions, please complete your Stripe checkout via the Membership buttons on our site. No goods or services were provided in exchange for any voluntary donation.">
+
+          <div class="row">
+            <div>
+              <label for="name">Full Name</label>
+              <input id="name" name="name" type="text" required>
+            </div>
+            <div>
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" type="tel" placeholder="">
+            </div>
+            <div>
+              <label for="city">City & State (or Country)</label>
+              <input id="city" name="city" type="text">
+            </div>
+          </div>
+
+          <label for="level">Membership Level</label>
+          <select id="level" name="membership_level" required>
+            <option value="">Select a level</option>
+            <option value="$25 / mo. — Membership">$25 / mo. — Membership</option>
+            <option value="$100 / mo. — MAX MEMBER">$100 / mo. — MAX MEMBER</option>
+          </select>
+          <div class="helper">After submitting this form, please complete your monthly checkout using the buttons above.</div>
+
+          <label for="why">Why do you want to join?</label>
+          <textarea id="why" name="why" placeholder="Share a few sentences…" required></textarea>
+
+          <button class="submit" type="submit">Submit Membership</button>
+        </form>
+      </div>
     </div>
+  </div>
+
+  <footer>
+    © 2025 Legion of Human Divinity • Guided by TUC • <a href="index.html">Home</a>
+  </footer>
 </body>
 </html>
