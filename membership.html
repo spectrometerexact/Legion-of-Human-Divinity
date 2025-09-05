@@ -175,53 +175,82 @@
         <p class="sub">Complete this form so we can welcome you and connect you to the community.</p>
 
         <!-- FormSubmit emails this to your inbox. Replace email if needed. -->
-        <form action="https://formsubmit.co/info@humandivinity.com" method="POST">
-          <!-- FormSubmit helpers -->
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_subject" value="New Membership — Legion of Human Divinity">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_autoresponse"
-                 value="Thank you for joining the Legion of Human Divinity. This confirms your membership submission. For monthly contributions, please complete your Stripe checkout via the Membership buttons on our site. No goods or services were provided in exchange for any voluntary donation.">
+       <form action="https://formsubmit.co/info@humandivinity.com" method="POST" autocomplete="on">
+  <!-- FormSubmit helpers -->
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_subject" value="New Membership — Legion of Human Divinity">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_autoresponse"
+         value="Thank you for joining the Legion of Human Divinity. This confirms your membership submission. For monthly contributions, please complete your Stripe checkout via the Membership buttons on our site. No goods or services were provided in exchange for any voluntary donation.">
 
-          <div class="row">
-            <div>
-              <label for="name">Full Name</label>
-              <input id="name" name="name" type="text" required>
-            </div>
-            <div>
-              <label for="email">Email Address</label>
-              <input id="email" name="email" type="email" required>
-            </div>
-          </div>
+  <!-- Full Name + Email -->
+  <label for="name">Full Name *</label>
+  <input id="name" name="name" type="text" required>
 
-          <div class="row">
-            <div>
-              <label for="phone">Phone (optional)</label>
-              <input id="phone" name="phone" type="tel" placeholder="">
-            </div>
-            <div>
-              <label for="city">City & State (or Country)</label>
-              <input id="city" name="city" type="text">
-            </div>
-          </div>
+  <label for="email">Email Address *</label>
+  <input id="email" name="email" type="email" required>
 
-          <label for="level">Membership Level</label>
-          <select id="level" name="membership_level" required>
-            <option value="">Select a level</option>
-            <option value="$25 / mo. — Membership">$25 / mo. — Membership</option>
-            <option value="$100 / mo. — MAX MEMBER">$100 / mo. — MAX MEMBER</option>
-          </select>
-          <div class="helper">After submitting this form, please complete your monthly checkout using the buttons above.</div>
+  <!-- Phone (required) -->
+  <label for="phone">Phone Number *</label>
+  <input id="phone" name="phone" type="tel" required>
 
-          <label for="why">Why do you want to join?</label>
-          <textarea id="why" name="why" placeholder="Share a few sentences…" required></textarea>
+  <!-- Full Address -->
+  <label for="street">Street Address *</label>
+  <input id="street" name="street" type="text" required>
 
-          <button class="submit" type="submit">Submit Membership</button>
-        </form>
-      </div>
-    </div>
-  </div>
+  <label for="city">City *</label>
+  <input id="city" name="city" type="text" required>
 
+  <label for="state">State / Province *</label>
+  <input id="state" name="state" type="text" required>
+
+  <label for="postal">Postal Code *</label>
+  <input id="postal" name="postal" type="text" required>
+
+  <label for="country">Country *</label>
+  <input id="country" name="country" type="text" required value="United States">
+
+  <!-- Age, Sex, Marital, Occupation -->
+  <label for="age">Age *</label>
+  <input id="age" name="age" type="number" min="13" max="120" required>
+
+  <label for="sex">Sex *</label>
+  <select id="sex" name="sex" required>
+    <option value="">Select…</option>
+    <option value="Female">Female</option>
+    <option value="Male">Male</option>
+    <option value="Non-binary">Non-binary</option>
+    <option value="Prefer not to say">Prefer not to say</option>
+  </select>
+
+  <label for="marital">Marital Status *</label>
+  <select id="marital" name="marital_status" required>
+    <option value="">Select…</option>
+    <option value="Single">Single</option>
+    <option value="Married">Married</option>
+    <option value="Divorced">Divorced</option>
+    <option value="Widowed">Widowed</option>
+    <option value="Prefer not to say">Prefer not to say</option>
+  </select>
+
+  <label for="occupation">Occupation *</label>
+  <input id="occupation" name="occupation" type="text" required>
+
+  <!-- Membership level dropdown (keep) -->
+  <label for="level">Membership Level *</label>
+  <select id="level" name="membership_level" required>
+    <option value="">Select a level</option>
+    <option value="$25 / mo. — Membership">$25 / mo. — Membership</option>
+    <option value="$100 / mo. — MAX MEMBER">$100 / mo. — MAX MEMBER</option>
+  </select>
+  <p class="helper">After submitting this form, please complete your monthly checkout using the buttons at the top of this page.</p>
+
+  <!-- Reason for joining (keep) -->
+  <label for="why">Why do you want to join? *</label>
+  <textarea id="why" name="why" rows="4" required></textarea>
+
+  <button class="submit" type="submit">Submit Membership</button>
+</form>
   <footer>
     © 2025 Legion of Human Divinity • Guided by TUC • <a href="index.html">Home</a>
   </footer>
