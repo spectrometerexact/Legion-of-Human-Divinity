@@ -6,7 +6,7 @@ A nonprofit spiritual organization based in Florida, devoted to awakening the di
 To advance the human experience by providing pathways to reduce the cost of living and material dependency, while fostering unity, compassion, and spiritual awareness.
 
 ### Website
-🌐 [Visit Site](https://benleeder.github.io/Legion-of-Human-Divinity/)
+🌐 [Visit Site](www.legionofhumandivinity.com)
 
 ### Contact
 📧 info@humandivinity.com
