@@ -116,6 +116,89 @@
         </div>
       </aside>
     </div>
+    <!-- ========= Holiday Drive: Request Assistance ========= -->
+<section id="request-assistance" style="max-width:900px;margin:3rem auto;padding:2rem;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04);">
+  <h2 style="margin:0 0 .5rem;color:#d4af37;text-align:center;">Request Assistance</h2>
+  <p style="margin:.25rem 0 2rem;color:#cbd5e1;text-align:center;">
+    If your family needs support this season, complete this form. Our volunteers will contact you within 3–5 days.
+  </p>
+
+  <form action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+    <!-- anti-bot -->
+    <input type="hidden" name="_subject" value="Holiday Drive - Recipient Request">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_redirect" value="https://YOUR_DOMAIN/thank-you.html">
+
+    <label>Full name*
+      <input required name="full_name" type="text" placeholder="First & Last" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <label>Email*
+      <input required name="email" type="email" placeholder="you@example.com" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <label>Phone*
+      <input required name="phone" type="tel" placeholder="(555) 555-5555" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <label>Preferred contact
+      <select name="preferred_contact" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+        <option>Email</option>
+        <option>Phone</option>
+        <option>Text</option>
+      </select>
+    </label>
+
+    <label style="grid-column:1/-1">Address (for delivery if selected)
+      <input name="address" type="text" placeholder="Street, City, State, ZIP" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <label>Household size*
+      <input required name="household_size" type="number" min="1" step="1" placeholder="e.g., 4" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <label>Ages in household
+      <input name="ages" type="text" placeholder="e.g., 3, 7, 12, adult" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <fieldset style="grid-column:1/-1;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;">
+      <legend style="color:#d4af37;">What help do you need? (check all that apply)</legend>
+      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Toys"> Toys</label>
+      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Clothing"> Clothing</label>
+      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Food Basket"> Food basket</label>
+      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Utilities Support"> Utilities support</label>
+      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Other"> Other</label>
+    </fieldset>
+
+    <label style="grid-column:1/-1">Details (sizes, preferences, allergies, deadlines)*
+      <textarea required name="details" rows="5" placeholder="Share anything that helps us tailor support." style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;"></textarea>
+    </label>
+
+    <label>Delivery or pickup?
+      <select name="fulfillment" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+        <option>Pickup at event</option>
+        <option>Delivery (if available)</option>
+        <option>Either</option>
+      </select>
+    </label>
+
+    <label>Best dates/times
+      <input name="best_times" type="text" placeholder="e.g., weekends, after 5pm" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
+    </label>
+
+    <label style="grid-column:1/-1">
+      <input required type="checkbox" name="consent"> I consent to be contacted about my request and understand my info will be used only for the Holiday Drive.
+    </label>
+
+    <button type="submit" style="grid-column:1/-1;justify-self:center;background:linear-gradient(90deg,#d4af37,#f5c84d);color:#111;border:none;border-radius:10px;padding:.9rem 1.4rem;font-weight:700;cursor:pointer;">
+      Submit Request
+    </button>
+
+    <p style="grid-column:1/-1;color:#cbd5e1;font-size:.9rem;text-align:center;margin:.5rem 0 0;">
+      Questions? Email <a href="mailto:info@humandivinity.com" style="color:#d4af37;">info@humandivinity.com</a>
+    </p>
+  </form>
+</section>
 
     <!-- Story section -->
     <div class="wrap" style="margin-top:22px;">
