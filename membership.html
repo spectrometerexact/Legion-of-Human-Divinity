@@ -176,12 +176,13 @@
 
         <!-- FormSubmit emails this to your inbox. Replace email if needed. -->
        <form action="https://formspree.io/f/xqarlzjo" method="POST" autocomplete="on">
-  <!-- FormSubmit helpers -->
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_subject" value="New Membership — Legion of Human Divinity">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_autoresponse"
-         value="Thank you for joining the Legion of Human Divinity. This confirms your membership submission. For monthly contributions, please complete your Stripe checkout via the Membership buttons on our site. No goods or services were provided in exchange for any voluntary donation.">
+
+    <!-- Full Name + Email -->
+    <label for="name">Full Name *</label>
+    <input id="name" name="name" type="text" required>
+
+    <label for="email">Email Address *</label>
+    <input id="email" name="email" type="email" required>
 
   <!-- Full Name + Email -->
   <label for="name">Full Name *</label>
