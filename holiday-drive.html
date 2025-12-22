@@ -1,232 +1,350 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Holiday Drive | Legion of Human Divinity</title>
-  <meta name="description" content="Join our Holiday Drive—see our goal progress, donate, and view how your gifts help local families.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Support the Homeless | Legion of Human Divinity</title>
+  <meta name="description" content="Help provide food, clothing, housing support, and job connections for neighbors experiencing homelessness." />
+
   <style>
     :root{
       --ink:#0f172a; --muted:#475569; --bg:#f6f8fc; --card:#ffffff;
-      --brand:#1e3a8a; --gold:#d4af37; --gold-2:#f5c84d; --ring:#94a3b8;
+      --brand:#1e3a8a; --gold:#d4af37; --gold-2:#f5c84c; --ring:#9aa3b8;
+      --danger:#b91c1c; --ok:#0f766e;
     }
     *{box-sizing:border-box}
-    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--ink);}
-    header{background:linear-gradient(135deg,#1e3a8a 0%, #3b82f6 100%); color:#fff; padding:38px 20px;}
-    .wrap{max-width:1100px; margin:0 auto; padding:0 20px;}
-    h1{margin:0 0 6px; letter-spacing:.2px}
-    .sub{margin:0; opacity:.95}
-    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
-    .btn{display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; font-weight:700; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.25)}
-    .btn.primary{background:#fff; color:#0b1220}
-    .btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2)); color:#111}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--ink)}
+    a{color:inherit}
+    header{background:linear-gradient(135deg,#1e3a8a 0%, #3b82f6 100%); color:#fff; padding:38px 20px}
+    .wrap{max-width:1100px;margin:0 auto}
+    h1{margin:0 0 6px;letter-spacing:-.2px}
+    .sub{margin:0;color:rgba(255,255,255,.9);max-width:70ch}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.25)}
+    .btn.primary{background:#fff;color:#0b1220}
+    .btn.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#111;border:none}
+    .btn.ghost{background:transparent;color:#fff}
+    main{padding:26px 20px 48px}
+    .grid{display:grid;gap:22px;grid-template-columns:1.1fr .9fr}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid #e6e8ee;border-radius:14px;box-shadow:0 10px 24px rgba(6,23,86,.06)}
+    .pad{padding:18px}
+    .section-title{margin:0 0 12px;color:var(--brand);letter-spacing:.2px}
+    .kpi{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+    .kpi strong{font-size:34px}
+    .kpi span{color:var(--muted)}
+    .meter{height:12px;border-radius:999px;background:#e8edf7;overflow:hidden;border:1px solid #dbe3f4;margin:10px 0 0}
+    .meter > div{height:100%;width:14%;background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+    ul{margin:10px 0 0 18px;color:var(--muted)}
+    li{margin:6px 0}
+    .note{font-size:.95rem;color:var(--muted);margin-top:10px}
+    .tag{display:inline-block;font-size:.82rem;font-weight:700;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#1e3a8a;border:1px solid #dbe3ff}
 
-    main{padding:26px 0 40px}
-    .grid{display:grid; gap:22px; grid-template-columns:1.1fr .9fr}
-    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    .gallery{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+    .gallery img{width:100%;height:180px;object-fit:cover;border-radius:12px;border:1px solid #e6e8ee}
+    @media (max-width:980px){.gallery{grid-template-columns:1fr 1fr}}
+    @media (max-width:580px){.gallery{grid-template-columns:1fr}}
 
-    .card{background:var(--card); border:1px solid #e6e8ee; border-radius:14px; box-shadow:0 10px 24px rgba(2,6,23,.06)}
-    .card.pad{padding:18px}
-
-    /* Thermometer */
-    .thermo-wrap{display:flex; gap:22px; align-items:flex-end}
-    .thermo{position:relative; width:80px; height:340px; border-radius:40px; background:#eef2f7; border:2px solid var(--ring); display:grid; place-items:end center; overflow:hidden}
-    .thermo .fill{width:100%; background:linear-gradient(180deg,var(--gold-2),var(--gold)); align-self:end; height:0}
-    .thermo .cap{position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); width:120px; height:120px; background:radial-gradient(circle at 50% 50%, var(--gold) 0%, var(--gold-2) 70%, #e7e7e7 71%); border-radius:50%; border:2px solid var(--ring)}
-    .progress-copy{font-size:.95rem; color:var(--muted)}
-    .progress-big{font-size:1.35rem; font-weight:800; color:var(--ink)}
-    .ticks{display:flex; flex-direction:column; gap:22px; font-size:.9rem; color:#334155}
-
-    .gallery{display:grid; gap:14px; grid-template-columns:repeat(3,1fr)}
-    .gallery img{width:100%; height:180px; object-fit:cover; border-radius:12px; border:1px solid #e6e8ee}
-    @media (max-width:900px){ .gallery{grid-template-columns:1fr 1fr} }
-    @media (max-width:580px){ .gallery{grid-template-columns:1fr} }
-
-    .section-title{margin:24px 0 10px; color:var(--brand); letter-spacing:.2px}
-    ul.clean{margin:10px 0 0 18px; color:var(--muted)}
-    footer{padding:20px; text-align:center; color:#6b7280}
+    .form-grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    @media (max-width:780px){.form-grid{grid-template-columns:1fr}}
+    label{font-weight:700;font-size:.92rem}
+    input,select,textarea{
+      width:100%;padding:10px 12px;border-radius:12px;border:1px solid #d6dbe7;
+      background:#fff;font:inherit
+    }
+    textarea{min-height:110px;resize:vertical}
+    .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .btn2{appearance:none;border:none;cursor:pointer;border-radius:12px;padding:10px 14px;font-weight:800}
+    .btn2.primary{background:var(--brand);color:#fff}
+    .btn2.gold{background:linear-gradient(90deg,var(--gold),var(--gold-2));color:#111}
+    .btn2.danger{background:var(--danger);color:#fff}
+    footer{padding:18px 20px;color:#64748b;text-align:center}
   </style>
 </head>
+
 <body>
   <header>
     <div class="wrap">
-      <h1>Holiday Drive</h1>
-      <p class="sub">Together we’re delivering joy—gifts, warm meals, and essentials for families in need.</p>
+      <div class="tag">Legion of Human Divinity</div>
+      <h1>Support the Homeless</h1>
+      <p class="sub">
+        Help provide meals, clothing essentials, short-term housing assistance, and pathways to work for neighbors experiencing homelessness.
+        Every contribution strengthens dignity and community.
+      </p>
+
       <div class="cta-row">
-        <!-- Link to your general donate page if you have one -->
         <a class="btn primary" href="index.html">Back to Home</a>
-        <!-- Quick donate buttons using your Stripe links (replace if yours changed) -->
-        <a class="btn gold" href="https://buy.stripe.com/eVq5kDe0Uczs22K5jM97G00">Give $5</a>
-        <a class="btn gold" href="https://buy.stripe.com/fZubJ1cWQ570gXEh2u97G01">Give $20</a>
-        <a class="btn gold" href="https://buy.stripe.com/28EaEXf4Y1UOazg5jM97G02">Give $50</a>
-        <a class="btn gold" href="https://buy.stripe.com/8x2bJ14qk42W7n45jM97G03">Give $100</a>
-        <a class="btn primary" href="https://buy.stripe.com/00w8wP1e87f822KdQi97G04">Custom Amount</a>
+
+        <!-- Replace these donation links with your real links -->
+        <a class="btn gold" href="https://buy.stripe.com/REPLACE_20">Give $20</a>
+        <a class="btn gold" href="https://buy.stripe.com/REPLACE_50">Give $50</a>
+        <a class="btn gold" href="https://buy.stripe.com/REPLACE_100">Give $100</a>
+        <a class="btn ghost" href="#custom-donate">Custom Amount</a>
       </div>
     </div>
   </header>
 
   <main>
     <div class="wrap grid">
-      <!-- Left: Progress + Copy -->
-      <section class="card pad">
-        <h2 class="section-title">Your impact so far</h2>
 
-        <div class="thermo-wrap">
-          <!-- Thermometer -->
-          <div>
-            <div class="thermo" aria-label="Fundraising thermometer">
-              <div id="thermoFill" class="fill" style="height:0%"></div>
-              <div class="cap" aria-hidden="true"></div>
+      <!-- LEFT: Progress + How it works -->
+      <section class="card pad">
+        <h2 class="section-title">Impact Progress</h2>
+
+        <!-- You can keep these values manual, or we can wire them to a backend later -->
+        <div class="kpi">
+          <strong id="raisedCopy">$3,500</strong>
+          <span>raised • Goal <strong>$25,000</strong> • <strong>14%</strong> of goal</span>
+        </div>
+
+        <div class="meter" aria-label="Donation progress">
+          <div id="progressBar" style="width:14%"></div>
+        </div>
+
+        <p class="note"><strong>How your support helps:</strong></p>
+        <ul>
+          <li><strong>Food & meals:</strong> hot meals, pantry staples, water, hygiene kits.</li>
+          <li><strong>Clothing & essentials:</strong> socks, underwear, coats, blankets, toiletries.</li>
+          <li><strong>Housing support:</strong> temporary lodging assistance & referral help.</li>
+          <li><strong>Jobs pathway:</strong> resume support, job matching, applications, interview prep.</li>
+        </ul>
+
+        <p class="note">
+          Want to help in other ways? Email us to volunteer, partner as an employer, or donate supplies.
+        </p>
+      </section>
+
+      <!-- RIGHT: Images -->
+      <section class="card pad">
+        <h2 class="section-title">Community Support Highlights</h2>
+
+        <!-- Replace these images with your new gratitude/support images -->
+        <div class="gallery">
+          <img src="assets/holiday/holiday-drive-main.png" alt="Support highlight image 1">
+          <img src="assets/holiday/holiday-drive-smiling.png" alt="Support highlight image 2">
+          <img src="assets/holiday/holiday-drive-urgent.png" alt="Support highlight image 3">
+        </div>
+
+        <p class="note">Tip: we can swap these for your new “gratitude” image(s) and job-support images.</p>
+      </section>
+
+      <!-- Story / Where funds go -->
+      <section class="card pad" style="grid-column:1/-1">
+        <h2 class="section-title">Where your gifts go</h2>
+        <p style="color:var(--muted);max-width:95ch;margin:0">
+          Funds support meals, essential supplies, transportation assistance, and help covering urgent short-term housing needs.
+          We also assist with job readiness: creating resumes, connecting with employers, and supporting applications so people can
+          regain stable income and dignity.
+        </p>
+      </section>
+
+      <!-- Custom Donate -->
+      <section id="custom-donate" class="card pad" style="grid-column:1/-1">
+        <h2 class="section-title">Donate a custom amount</h2>
+        <p class="note" style="margin-top:0">Use your custom donation link below.</p>
+
+        <!-- Replace this with your real custom Stripe link -->
+        <a class="btn2 gold" href="https://buy.stripe.com/REPLACE_CUSTOM" style="display:inline-block;text-decoration:none">
+          Donate Custom Amount
+        </a>
+      </section>
+
+      <!-- Request Assistance (KEEP your existing Formspree action link) -->
+      <section id="request-assistance" class="card pad" style="grid-column:1/-1">
+        <h2 class="section-title">Request Assistance</h2>
+        <p class="note" style="margin-top:0">
+          If you need support (food, clothing, housing referral, job help), complete this form. We’ll follow up as soon as possible.
+        </p>
+
+        <!-- KEEP your existing Formspree action URL here -->
+        <form action="https://formspree.io/f/REPLACE_WITH_YOUR_EXISTING_ID" method="POST">
+          <div class="form-grid">
+            <div>
+              <label for="name">Full name</label>
+              <input id="name" name="name" required />
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" inputmode="tel" required />
+            </div>
+
+            <div>
+              <label for="email">Email (if available)</label>
+              <input id="email" name="email" type="email" />
+            </div>
+
+            <div>
+              <label for="city">City / Area</label>
+              <input id="city" name="city" required />
+            </div>
+
+            <div style="grid-column:1/-1">
+              <label for="helpType">What do you need help with?</label>
+              <select id="helpType" name="help_type" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Food assistance</option>
+                <option>Clothing / essentials</option>
+                <option>Housing referral / temporary lodging help</option>
+                <option>Job help (resume, applications, interviews)</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div style="grid-column:1/-1">
+              <label for="details">Tell us what’s going on</label>
+              <textarea id="details" name="details" placeholder="Share any details that help us support you (best time to reach you, urgent needs, etc.)"></textarea>
             </div>
           </div>
 
-          <!-- Labels next to thermometer -->
-          <div class="ticks" aria-hidden="true">
-            <span>$25,000</span>
-            <span>$20,000</span>
-            <span>$15,000</span>
-            <span>$10,000</span>
-            <span>$5,000</span>
-            <span>$0</span>
+          <div class="form-actions">
+            <button class="btn2 primary" type="submit">Submit Request</button>
           </div>
-        </div>
-
-        <p class="progress-copy" style="margin-top:12px;">
-          <span class="progress-big" id="raisedCopy">$3,500</span> raised
-          &nbsp;•&nbsp; Goal <strong>$25,000</strong> &nbsp;•&nbsp;
-          <strong id="pctCopy">14%</strong> of goal
-        </p>
-
-        <h3 class="section-title">How the drive works</h3>
-        <ul class="clean">
-          <li><strong>Gifts & essentials:</strong> toys, winter gear, hygiene kits, and pantry staples.</li>
-          <li><strong>Delivery days:</strong> volunteers deliver to families selected by local partners.</li>
-          <li><strong>Every dollar counts:</strong> $20 stocks a hygiene kit; $50 fills a pantry box; $100 outfits a child for winter.</li>
-        </ul>
+        </form>
       </section>
 
-   <!-- Right: Images -->
-<section class="card pad">
-  <h2 class="section-title">Holiday Drive Highlights</h2>
-
-  <div class="gallery">
-    <img src="6FD9CB6F-A9FB-4B4A-86BA-247E5A9D79A7.png" alt="Holiday Drive Main Image">
-    <img src="1E84436A-9454-4795-B7CF-C22CCE046FD1.png" alt="Holiday Drive Smiling">
-    <img src="61218C00-5194-43DA-8E43-E8DCE6BC2C97.png" alt="Urgent Holiday Drive">
-  </div>
-</section>
-     <!-- Story section -->
-    <div class="wrap" style="margin-top:22px;">
-      <section class="card pad">
-        <h2 class="section-title">Where your gifts go</h2>
-        <p style="color:var(--muted); max-width:70ch;">
-          Funds support gift purchases, food boxes, and last-mile delivery. We partner with local schools,
-          shelters, and community centers to identify families most in need. After the drive, we’ll post
-          a short impact report with photos and totals so you can see the results.
+      <!-- Submit Resume -->
+      <section id="submit-resume" class="card pad" style="grid-column:1/-1">
+        <h2 class="section-title">Submit a Resume</h2>
+        <p class="note" style="margin-top:0">
+          Upload your resume so we can help with job matching and applications.
+          <strong>If uploads don’t work on your Formspree plan, use the “Resume link” field instead.</strong>
         </p>
+
+        <!-- Replace with a NEW Formspree form endpoint for resumes -->
+        <form action="https://formspree.io/f/REPLACE_WITH_NEW_RESUME_FORM_ID" method="POST" enctype="multipart/form-data">
+          <div class="form-grid">
+            <div>
+              <label for="rname">Full name</label>
+              <input id="rname" name="name" required />
+            </div>
+            <div>
+              <label for="rphone">Phone</label>
+              <input id="rphone" name="phone" inputmode="tel" required />
+            </div>
+
+            <div>
+              <label for="remail">Email</label>
+              <input id="remail" name="email" type="email" required />
+            </div>
+
+            <div>
+              <label for="resume">Resume file (PDF/DOC)</label>
+              <input id="resume" name="resume_file" type="file" accept=".pdf,.doc,.docx" />
+            </div>
+
+            <div style="grid-column:1/-1">
+              <label for="resumeLink">Resume link (Google Drive / Dropbox / etc.)</label>
+              <input id="resumeLink" name="resume_link" placeholder="https://..." />
+            </div>
+
+            <div style="grid-column:1/-1">
+              <label for="skills">Skills / roles you want</label>
+              <textarea id="skills" name="skills" placeholder="Example: warehouse, customer service, driving, security, construction, admin…"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn2 gold" type="submit">Submit Resume</button>
+          </div>
+        </form>
       </section>
+
+      <!-- Job Application / Job Matching Form -->
+      <section id="job-application" class="card pad" style="grid-column:1/-1">
+        <h2 class="section-title">Job Application / Job Matching</h2>
+        <p class="note" style="margin-top:0">
+          Fill this out so we can help you apply to openings and connect with employers.
+        </p>
+
+        <!-- Replace with a NEW Formspree form endpoint for job applications -->
+        <form action="https://formspree.io/f/REPLACE_WITH_NEW_JOB_FORM_ID" method="POST">
+          <div class="form-grid">
+            <div>
+              <label for="jname">Full name</label>
+              <input id="jname" name="name" required />
+            </div>
+            <div>
+              <label for="jphone">Phone</label>
+              <input id="jphone" name="phone" inputmode="tel" required />
+            </div>
+
+            <div>
+              <label for="jemail">Email</label>
+              <input id="jemail" name="email" type="email" />
+            </div>
+            <div>
+              <label for="availability">Availability</label>
+              <select id="availability" name="availability" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Full-time</option>
+                <option>Part-time</option>
+                <option>Temporary</option>
+                <option>Any</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="workAuth">Work authorization (if applicable)</label>
+              <select id="workAuth" name="work_authorization">
+                <option value="" disabled selected>Select one</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Unsure</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="transportation">Transportation</label>
+              <select id="transportation" name="transportation">
+                <option value="" disabled selected>Select one</option>
+                <option>Yes</option>
+                <option>No</option>
+                <option>Sometimes</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="preferred">Preferred job types</label>
+              <input id="preferred" name="preferred_job_types" placeholder="Example: retail, warehouse, security, kitchen, labor..." />
+            </div>
+            <div>
+              <label for="shift">Preferred shift</label>
+              <select id="shift" name="preferred_shift">
+                <option value="" disabled selected>Select one</option>
+                <option>Day</option>
+                <option>Evening</option>
+                <option>Night</option>
+                <option>Any</option>
+              </select>
+            </div>
+
+            <div style="grid-column:1/-1">
+              <label for="experience">Work history / experience summary</label>
+              <textarea id="experience" name="experience" placeholder="Brief summary of your work experience and strengths."></textarea>
+            </div>
+
+            <div style="grid-column:1/-1">
+              <label for="barriers">Anything we should know to support you?</label>
+              <textarea id="barriers" name="barriers" placeholder="Example: need ID replacement, interview clothes, background/credit barriers, schedule constraints, etc."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn2 primary" type="submit">Submit Job Form</button>
+          </div>
+        </form>
+      </section>
+
     </div>
-    <!-- ========= Holiday Drive: Request Assistance ========= -->
-<section id="request-assistance" style="max-width:900px;margin:3rem auto;padding:2rem;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.04);">
-  <h2 style="margin:0 0 .5rem;color:#d4af37;text-align:center;">Request Assistance</h2>
-  <p style="margin:.25rem 0 2rem;color:#cbd5e1;text-align:center;">
-    If your family needs support this season, complete this form. Our volunteers will contact you within 3–5 days.
-  </p>
-
-  <form action="https://formspree.io/f/mgvgzkyr" method="POST" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
-    <!-- anti-bot -->
-    <input type="hidden" name="_subject" value="Holiday Drive - Recipient Request">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_redirect" value="https://YOUR_DOMAIN/thank-you.html">
-
-    <label>Full name*
-      <input required name="full_name" type="text" placeholder="First & Last" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <label>Email*
-      <input required name="email" type="email" placeholder="you@example.com" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <label>Phone*
-      <input required name="phone" type="tel" placeholder="(555) 555-5555" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <label>Preferred contact
-      <select name="preferred_contact" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-        <option>Email</option>
-        <option>Phone</option>
-        <option>Text</option>
-      </select>
-    </label>
-
-    <label style="grid-column:1/-1">Address (for delivery if selected)
-      <input name="address" type="text" placeholder="Street, City, State, ZIP" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <label>Household size*
-      <input required name="household_size" type="number" min="1" step="1" placeholder="e.g., 4" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <label>Ages in household
-      <input name="ages" type="text" placeholder="e.g., 3, 7, 12, adult" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <fieldset style="grid-column:1/-1;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;">
-      <legend style="color:#d4af37;">What help do you need? (check all that apply)</legend>
-      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Toys"> Toys</label>
-      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Clothing"> Clothing</label>
-      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Food Basket"> Food basket</label>
-      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Utilities Support"> Utilities support</label>
-      <label style="display:inline-block;margin:.25rem 1rem .25rem 0;"><input type="checkbox" name="needs" value="Other"> Other</label>
-    </fieldset>
-
-    <label style="grid-column:1/-1">Details (sizes, preferences, allergies, deadlines)*
-      <textarea required name="details" rows="5" placeholder="Share anything that helps us tailor support." style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;"></textarea>
-    </label>
-
-    <label>Delivery or pickup?
-      <select name="fulfillment" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-        <option>Pickup at event</option>
-        <option>Delivery (if available)</option>
-        <option>Either</option>
-      </select>
-    </label>
-
-    <label>Best dates/times
-      <input name="best_times" type="text" placeholder="e.g., weekends, after 5pm" style="width:100%;padding:.85rem;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0c0224;color:#fff;">
-    </label>
-
-    <label style="grid-column:1/-1">
-      <input required type="checkbox" name="consent"> I consent to be contacted about my request and understand my info will be used only for the Holiday Drive.
-    </label>
-
-    <button type="submit" style="grid-column:1/-1;justify-self:center;background:linear-gradient(90deg,#d4af37,#f5c84d);color:#111;border:none;border-radius:10px;padding:.9rem 1.4rem;font-weight:700;cursor:pointer;">
-      Submit Request
-    </button>
-
-    <p style="grid-column:1/-1;color:#cbd5e1;font-size:.9rem;text-align:center;margin:.5rem 0 0;">
-      Questions? Email <a href="mailto:Leeder@legionofhumandivintiy.com">Leeder@legionofhumandivintiy.com</a>
-    </p>
-  </form>
-</section>
   </main>
 
-   
-
   <footer>
-    © 2025 Legion of Human Divinity • Thank you for giving generously
+    © <span id="yr"></span> Legion of Human Divinity • Together we reduce burdens and restore dignity.
   </footer>
 
   <script>
-    // --- Thermometer config ---
-    const GOAL = 25000;
-    const RAISED = 3500; // set current total here
-    const pct = Math.max(0, Math.min(100, Math.round((RAISED / GOAL) * 100)));
-
-    // Update UI
-    document.getElementById('thermoFill').style.height = pct + '%';
-    document.getElementById('raisedCopy').textContent = '$' + RAISED.toLocaleString();
-    document.getElementById('pctCopy').textContent = pct + '%';
+    document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
