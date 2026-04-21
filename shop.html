@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop Legion</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f3ef;
+  color: #222;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+h2 {
+  font-weight: normal;
+  margin: 10px 0;
+}
+
+.tagline {
+  color: #5c6b5c;
+  margin-top: 10px;
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.price {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+button {
+  background: #b27b2c;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #915f1f;
+}
+
+.member-note {
+  text-align: center;
+  padding: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Shop Legion</h1>
+  <h2>Legion of Human Divinity</h2>
+  <p class="tagline">100% of proceeds go to the research and development for a sustainable future</p>
+</header>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="Search items..." onkeyup="filterItems()">
+  <select id="category" onchange="filterItems()">
+    <option value="">All Categories</option>
+    <option value="Clothing">Clothing</option>
+    <option value="Household">Household</option>
+    <option value="Electronics">Electronics</option>
+  </select>
+</div>
+
+<div class="products" id="productList"></div>
+
+<div class="member-note">
+  <strong>Legion Members:</strong> Enter your ID at checkout for exclusive discounts
+</div>
+
+<script>
+const products = [
+  {
+    name: "Leather Sofa",
+    price: 150,
+    category: "Household",
+    image: "https://via.placeholder.com/300",
+    description: "Like new condition"
+  },
+  {
+    name: "Mountain Bike",
+    price: 120,
+    category: "Household",
+    image: "https://via.placeholder.com/300",
+    description: "Good condition"
+  },
+  {
+    name: "Laptop Computer",
+    price: 200,
+    category: "Electronics",
+    image: "https://via.placeholder.com/300",
+    description: "Refurbished, fast"
+  }
+];
+
+function displayProducts(list) {
+  const container = document.getElementById("productList");
+  container.innerHTML = "";
+
+  list.forEach(p => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.image}">
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p>${p.description}</p>
+          <div class="price">$${p.price}</div>
+          <button onclick="buyItem('${p.name}', ${p.price})">Buy Now</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function filterItems() {
+  const search = document.getElementById("search").value.toLowerCase();
+  const category = document.getElementById("category").value;
+
+  const filtered = products.filter(p =>
+    p.name.toLowerCase().includes(search) &&
+    (category === "" || p.category === category)
+  );
+
+  displayProducts(filtered);
+}
+
+function buyItem(name, price) {
+  alert("Next step: connect Stripe checkout for " + name);
+}
+
+displayProducts(products);
+</script>
+
+</body>
+</html>
