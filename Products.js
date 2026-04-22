@@ -1,12 +1,12 @@
 const products = [
   {
     id: "item001",
-    name: "Leather Sofa",
-    price: 150,
-    category: "Household",
-    condition: "Gently Used",
+    name: "1000w Electric Bicycle",
+    price: 850,
+    category: "Electronics",
+    condition: "Brand New",
     image: "assets/items/sofa.jpg",
-    description: "Comfortable leather sofa in very good condition. Minor wear, still sturdy and clean.",
+    description: "1000w,20ah,48v top speed 30mph 30 mile range.",
     badge: "GREAT DEAL",
     sold: false
   },
