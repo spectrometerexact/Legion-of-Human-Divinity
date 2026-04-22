@@ -1,190 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Legion</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Legion</title>
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f5f3ef;
-  color: #222;
-}
+  <style>
+    :root{
+      --bg:#f5f3ef;
+      --card:#ffffff;
+      --ink:#222;
+      --muted:#666;
+      --gold:#b27b2c;
+      --gold-dark:#915f1f;
+      --line:#ddd;
+      --sold:#9b1c1c;
+      --deal:#0f766e;
+      --new:#1d4ed8;
+      --hot:#7c3aed;
+    }
 
-header {
-  text-align: center;
-  padding: 40px 20px;
-}
+    *{box-sizing:border-box}
 
-h1 {
-  font-size: 48px;
-  margin: 0;
-}
+    body{
+      font-family: Arial, sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+    }
 
-h2 {
-  font-weight: normal;
-  margin: 10px 0;
-}
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+    }
 
-.tagline {
-  color: #5c6b5c;
-  margin-top: 10px;
-}
+    header{
+      text-align:center;
+      padding:40px 20px 20px;
+    }
 
-.search-bar {
-  display: flex;
-  gap: 10px;
-  padding: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+    h1{
+      font-size:clamp(36px,5vw,56px);
+      margin:0;
+    }
 
-.search-bar input,
-.search-bar select {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
+    h2{
+      font-weight:normal;
+      margin:10px 0 4px;
+    }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
+    .tagline{
+      color:#5c6b5c;
+      margin-top:10px;
+      max-width:700px;
+      margin-left:auto;
+      margin-right:auto;
+    }
 
-.card {
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+    .top-actions{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:20px 0 0;
+    }
 
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
+    .top-actions a{
+      background:var(--gold);
+      color:white;
+      padding:10px 16px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:700;
+    }
 
-.card-body {
-  padding: 15px;
-}
+    .controls{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:12px;
+      padding:20px 0 10px;
+    }
 
-.price {
-  font-weight: bold;
-  margin: 10px 0;
-}
+    .controls input,
+    .controls select{
+      padding:12px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      width:100%;
+      font-size:16px;
+    }
 
-button {
-  background: #b27b2c;
-  color: white;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  border-radius: 6px;
-  cursor: pointer;
-}
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:22px;
+      padding:20px 0 40px;
+    }
 
-button:hover {
-  background: #915f1f;
-}
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 4px 14px rgba(0,0,0,0.08);
+      position:relative;
+      display:flex;
+      flex-direction:column;
+    }
 
-.member-note {
-  text-align: center;
-  padding: 20px;
-}
+    .image-wrap{
+      position:relative;
+    }
 
-</style>
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+      background:#ddd;
+    }
+
+    .badge{
+      position:absolute;
+      top:12px;
+      left:12px;
+      color:#fff;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+      padding:7px 10px;
+      border-radius:999px;
+      text-transform:uppercase;
+      box-shadow:0 2px 8px rgba(0,0,0,.2);
+    }
+
+    .badge.sold{background:var(--sold);}
+    .badge.deal{background:var(--deal);}
+    .badge.new{background:var(--new);}
+    .badge.hot{background:var(--hot);}
+
+    .sold-overlay{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .card-body{
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+
+    .card h3{
+      margin:0;
+      font-size:22px;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .price{
+      font-weight:bold;
+      font-size:22px;
+      margin-top:6px;
+    }
+
+    .desc-wrap{
+      position:relative;
+    }
+
+    .desc{
+      color:#444;
+      font-size:15px;
+      max-height:44px;
+      overflow:hidden;
+      transition:max-height .25s ease;
+      line-height:1.45;
+    }
+
+    .desc.expanded{
+      max-height:240px;
+    }
+
+    .toggle-desc{
+      background:none;
+      border:none;
+      color:var(--gold-dark);
+      padding:0;
+      width:auto;
+      cursor:pointer;
+      font-weight:700;
+      text-align:left;
+    }
+
+    .buy-btn{
+      background:var(--gold);
+      color:white;
+      border:none;
+      padding:12px;
+      width:100%;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      margin-top:10px;
+    }
+
+    .buy-btn:hover{
+      background:var(--gold-dark);
+    }
+
+    .buy-btn:disabled{
+      background:#999;
+      cursor:not-allowed;
+    }
+
+    .member-note{
+      text-align:center;
+      padding:0 0 30px;
+      color:#444;
+    }
+
+    .empty-state{
+      text-align:center;
+      color:#666;
+      padding:30px 0 50px;
+      font-size:18px;
+    }
+
+    @media (max-width:800px){
+      .controls{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="wrap">
+    <h1>Shop Legion</h1>
+    <h2>Legion of Human Divinity</h2>
+    <p class="tagline">
+      100% of proceeds go to the research and development for a sustainable future
+    </p>
 
-<header>
-  <h1>Shop Legion</h1>
-  <h2>Legion of Human Divinity</h2>
-  <p class="tagline">100% of proceeds go to the research and development for a sustainable future</p>
-</header>
+    <div class="top-actions">
+      <a href="index.html">Return Home</a>
+    </div>
+  </header>
 
-<div class="search-bar">
-  <input type="text" id="search" placeholder="Search items..." onkeyup="filterItems()">
-  <select id="category" onchange="filterItems()">
-    <option value="">All Categories</option>
-    <option value="Clothing">Clothing</option>
-    <option value="Household">Household</option>
-    <option value="Electronics">Electronics</option>
-  </select>
-</div>
+  <main class="wrap">
+    <section class="controls">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search items..."
+      />
 
-<div class="products" id="productList"></div>
+      <select id="category">
+        <option value="">All Categories</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Books">Books</option>
+        <option value="Other">Other</option>
+      </select>
 
-<div class="member-note">
-  <strong>Legion Members:</strong> Enter your ID at checkout for exclusive discounts
-</div>
+      <select id="availability">
+        <option value="">All Items</option>
+        <option value="available">Available Only</option>
+        <option value="sold">Sold Only</option>
+      </select>
+    </section>
 
-<script>
-const products = [
-  {
-    name: "Leather Sofa",
-    price: 150,
-    category: "Household",
-    image: "https://via.placeholder.com/300",
-    description: "Like new condition"
-  },
-  {
-    name: "Mountain Bike",
-    price: 120,
-    category: "Household",
-    image: "https://via.placeholder.com/300",
-    description: "Good condition"
-  },
-  {
-    name: "Laptop Computer",
-    price: 200,
-    category: "Electronics",
-    image: "https://via.placeholder.com/300",
-    description: "Refurbished, fast"
-  }
-];
+    <section id="productList" class="products"></section>
 
-function displayProducts(list) {
-  const container = document.getElementById("productList");
-  container.innerHTML = "";
+    <div id="emptyState" class="empty-state" style="display:none;">
+      No items match your search.
+    </div>
 
-  list.forEach(p => {
-    container.innerHTML += `
-      <div class="card">
-        <img src="${p.image}">
-        <div class="card-body">
-          <h3>${p.name}</h3>
-          <p>${p.description}</p>
-          <div class="price">$${p.price}</div>
-          <button onclick="buyItem('${p.name}', ${p.price})">Buy Now</button>
-        </div>
-      </div>
-    `;
-  });
-}
+    <div class="member-note">
+      <strong>Legion Members:</strong> enter your member code at checkout for exclusive discounts.
+    </div>
+  </main>
 
-function filterItems() {
-  const search = document.getElementById("search").value.toLowerCase();
-  const category = document.getElementById("category").value;
+  <script src="products.js"></script>
+  <script>
+    const productList = document.getElementById("productList");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("search");
+    const categorySelect = document.getElementById("category");
+    const availabilitySelect = document.getElementById("availability");
 
-  const filtered = products.filter(p =>
-    p.name.toLowerCase().includes(search) &&
-    (category === "" || p.category === category)
-  );
+    function badgeClass(badgeText) {
+      const value = (badgeText || "").toLowerCase();
 
-  displayProducts(filtered);
-}
+      if (value === "sold") return "sold";
+      if (value === "great deal") return "deal";
+      if (value === "new") return "new";
+      if (value === "hot item") return "hot";
+      return "deal";
+    }
 
-function buyItem(name, price) {
-  alert("Next step: connect Stripe checkout for " + name);
-}
+    function renderProducts(items) {
+      productList.innerHTML = "";
 
-displayProducts(products);
-</script>
+      if (!items.length) {
+        emptyState.style.display = "block";
+        return;
+      }
 
+      emptyState.style.display = "none";
+
+      items.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const badgeHTML = p.badge
+          ? `<div class="badge ${badgeClass(p.badge)}">${p.badge}</div>`
+          : "";
+
+        const soldOverlayHTML = p.sold
+          ? `<div class="sold-overlay">Sold</div>`
+          : "";
+
+        card.innerHTML = `
+          <div class="image-wrap">
+            <img src="${p.image}" alt="${p.name}">
+            ${badgeHTML}
+            ${soldOverlayHTML}
+          </div>
+
+          <div class="card-body">
+            <h3>${p.name}</h3>
+            <div class="meta">${p.category} • ${p.condition}</div>
+            <div class="price">$${p.price}</div>
+
+            <div class="desc-wrap">
+              <div class="desc" id="desc-${p.id}">${p.description}</div>
+              <button class="toggle-desc" onclick="toggleDescription('desc-${p.id}', this)">Read more</button>
+            </div>
+
+            <button class="buy-btn" ${p.sold ? "disabled" : ""} onclick="buyItem('${p.id}')">
+              ${p.sold ? "Unavailable" : "Buy Now"}
+            </button>
+          </div>
+        `;
+
+        productList.appendChild(card);
+      });
+    }
+
+    function filterProducts() {
+      const search = searchInput.value.toLowerCase().trim();
+      const category = categorySelect.value;
+      const availability = availabilitySelect.value;
+
+      const filtered = products.filter((p) => {
+        const matchesSearch =
+          p.name.toLowerCase().includes(search) ||
+          p.description.toLowerCase().includes(search) ||
+          p.category.toLowerCase().includes(search);
+
+        const matchesCategory = !category || p.category === category;
+
+        const matchesAvailability =
+          !availability ||
+          (availability === "available" && !p.sold) ||
+          (availability === "sold" && p.sold);
+
+        return matchesSearch && matchesCategory && matchesAvailability;
+      });
+
+      renderProducts(filtered);
+    }
+
+    function toggleDescription(id, button) {
+      const desc = document.getElementById(id);
+      desc.classList.toggle("expanded");
+      button.textContent = desc.classList.contains("expanded") ? "Show less" : "Read more";
+    }
+
+    function buyItem(id) {
+      const item = products.find(p => p.id === id);
+      if (!item || item.sold) return;
+
+      alert("Next step: connect Stripe checkout for " + item.name);
+    }
+
+    searchInput.addEventListener("input", filterProducts);
+    categorySelect.addEventListener("change", filterProducts);
+    availabilitySelect.addEventListener("change", filterProducts);
+
+    renderProducts(products);
+  </script>
 </body>
 </html>
