@@ -5,7 +5,7 @@ const products = [
     price: 850,
     category: "Electronics",
     condition: "Brand New",
-    image: "assets/items/sofa.jpg",
+    image: "assets/items/IMG_4237.jpeg",
     description: "1000w,20ah,48v top speed 30mph 30 mile range.",
     badge: "GREAT DEAL",
     sold: false
