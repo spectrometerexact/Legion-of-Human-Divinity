@@ -2,64 +2,710 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HopefulHands | Donation Marketplace</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Hopeful Hands | Donation Marketplace</title>
+    <!-- Google Fonts for clean modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- UPDATED: These paths now point to the subfolders -->
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #2c0b3a 0%, #1e0428 100%);
+            color: #f5eedc;
+            padding: 0 20px 60px 20px;
+        }
+
+        /* main container */
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* header purple/gold theme */
+        .header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0 20px 0;
+            border-bottom: 3px solid #f5b81b;
+            margin-bottom: 35px;
+        }
+
+        .logo-area h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFD966, #FFB347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo-area p {
+            font-size: 0.85rem;
+            color: #e0cba0;
+            margin-top: 6px;
+        }
+
+        .search-bar {
+            display: flex;
+            background: #3b1a48;
+            border-radius: 60px;
+            overflow: hidden;
+            border: 1px solid #d4af37;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .search-bar input {
+            padding: 12px 20px;
+            width: 260px;
+            border: none;
+            background: transparent;
+            color: #fff3e0;
+            font-weight: 500;
+            outline: none;
+        }
+        .search-bar input::placeholder {
+            color: #cfaed4;
+        }
+        .search-bar button {
+            background: #d4af37;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            color: #2c0b3a;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .search-bar button:hover {
+            background: #ffcd4a;
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.8rem;
+            background: #46235b;
+            padding: 10px 16px;
+            border-radius: 50px;
+            border: 1px solid #f5b81b;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .cart-icon i {
+            color: #FFD966;
+        }
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ffb347;
+            color: #2c0b3a;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 30px;
+            padding: 2px 8px;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        /* two column layout: products grid + shipping/cart sidebar */
+        .main-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+        }
+
+        .products-grid {
+            flex: 2.5;
+            min-width: 260px;
+        }
+
+        .sidebar {
+            flex: 1.2;
+            min-width: 260px;
+            background: #341244c9;
+            backdrop-filter: blur(2px);
+            border-radius: 32px;
+            padding: 22px 18px;
+            border: 1px solid #ffd96666;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            height: fit-content;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            border-left: 6px solid #f5b81b;
+            padding-left: 16px;
+            margin-bottom: 28px;
+            margin-top: 5px;
+        }
+
+        .product-card {
+            background: #251b30e0;
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.2s;
+            border: 1px solid #b8860b80;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: #f5b81b;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+        }
+
+        .product-img {
+            background: #1f102b;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #e5c875;
+            border-bottom: 1px solid #6a3e8a;
+        }
+
+        .product-info {
+            padding: 18px 16px 20px;
+        }
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFE6A3;
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffcd7e;
+            margin: 10px 0 8px;
+        }
+        .product-desc {
+            font-size: 0.85rem;
+            color: #e2cfb3;
+            margin-bottom: 18px;
+            line-height: 1.4;
+        }
+        .add-to-cart {
+            background: linear-gradient(95deg, #d4af37, #f5b81b);
+            border: none;
+            width: 100%;
+            padding: 12px 0;
+            font-weight: bold;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #2c0a3a;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .add-to-cart:hover {
+            background: #ffcd60;
+            transform: scale(0.98);
+        }
+
+        /* shipping calculator style */
+        .shipping-card {
+            background: #271d33;
+            padding: 18px;
+            border-radius: 28px;
+            margin-bottom: 30px;
+        }
+        .shipping-card h3 {
+            font-size: 1.3rem;
+            border-left: 4px solid #f5b81b;
+            padding-left: 12px;
+            margin-bottom: 18px;
+        }
+        .input-group {
+            display: flex;
+            gap: 12px;
+            margin: 18px 0;
+            flex-wrap: wrap;
+        }
+        .input-group input {
+            flex: 2;
+            padding: 12px;
+            border-radius: 40px;
+            border: none;
+            background: #3d274b;
+            color: #fff2da;
+            font-weight: 500;
+            outline: none;
+        }
+        .input-group button {
+            background: #d4af37;
+            border: none;
+            border-radius: 40px;
+            padding: 0 20px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #1e0729;
+        }
+        .ship-result {
+            background: #1f0e2a;
+            border-radius: 20px;
+            padding: 12px;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .cart-mini {
+            background: #1f112e;
+            border-radius: 28px;
+            padding: 18px;
+        }
+        .cart-mini h3 {
+            margin-bottom: 18px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .cart-items-list {
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #55416e;
+        }
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 12px 0;
+            text-align: right;
+        }
+        .checkout-btn {
+            width: 100%;
+            background: #c8a82b;
+            border: none;
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: #2c0b3a;
+            transition: 0.2s;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #b3956e;
+            padding: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 55px;
+            padding: 24px;
+            color: #cbb879;
+            border-top: 1px solid #d4af3740;
+        }
+
+        @media (max-width: 800px) {
+            .header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <div class="app-container">
+    <!-- Header with branding and search + cart -->
     <div class="header">
         <div class="logo-area">
             <h1><i class="fas fa-hand-holding-heart"></i> HopefulHands</h1>
-            <p>every donated item changes a life</p>
+            <p>every donated item changes a life · nonprofit marketplace</p>
         </div>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search items...">
+            <input type="text" id="searchInput" placeholder="Search for donated goods...">
             <button id="searchBtn"><i class="fas fa-search"></i></button>
         </div>
-        <div class="cart-icon">
+        <div class="cart-icon" id="cartIconTrigger">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count" id="cartCountBadge">0</span>
         </div>
     </div>
 
     <div class="main-layout">
+        <!-- PRODUCT GRID SECTION: placeholder items replaceable -->
         <div class="products-grid">
             <div class="section-title"><i class="fas fa-box-open"></i> Donated treasures</div>
-            <div class="grid-container" id="productsContainer"></div>
+            <div class="grid-container" id="productsContainer">
+                <!-- dynamic products from javascript -->
+            </div>
         </div>
 
+        <!-- SIDEBAR: shipping calculator + cart summary -->
         <div class="sidebar">
             <div class="shipping-card">
-                <h3><i class="fas fa-truck-fast"></i> Shipping</h3>
+                <h3><i class="fas fa-truck-fast"></i> Shipping estimate</h3>
                 <div class="input-group">
-                    <input type="text" id="zipCode" placeholder="ZIP code">
+                    <input type="text" id="zipCode" placeholder="Enter ZIP code (e.g., 90210)" maxlength="10">
                     <button id="calcShipBtn">Calculate</button>
                 </div>
-                <div id="shippingResult">💡 Enter ZIP to see cost</div>
+                <div class="ship-result" id="shippingResult">
+                    💡 Enter ZIP to see shipping cost
+                </div>
+                <small style="color:#e2c286;">*Shipping fees support our mission</small>
             </div>
 
             <div class="cart-mini">
-                <h3><i class="fas fa-bag-shopping"></i> Cart</h3>
-                <div id="cartItemsList"><div class="empty-cart">Your cart is empty ✨</div></div>
+                <h3><i class="fas fa-bag-shopping"></i> Your donation cart</h3>
+                <div id="cartItemsList" class="cart-items-list">
+                    <div class="empty-cart">Your cart is empty ✨</div>
+                </div>
                 <div class="cart-total" id="cartTotalDisplay">$0.00</div>
-                <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-donate"></i> Generate Invoice & Email</button>
-                <button class="invoice-btn" id="pdfOnlyBtn"><i class="fas fa-file-pdf"></i> Download PDF Invoice</button>
+                <button class="checkout-btn" id="checkoutBtn"><i class="fas fa-donate"></i> Proceed to checkout (donation)</button>
+                <p style="font-size: 11px; margin-top: 10px; text-align: center;">100% of proceeds support local programs</p>
             </div>
         </div>
     </div>
-    <footer><i class="fas fa-heart" style="color:#f5b81b;"></i> HopefulHands Nonprofit</footer>
+    <footer>
+        <i class="fas fa-heart" style="color:#f5b81b;"></i> HopefulHands Nonprofit — every purchase funds community aid
+    </footer>
 </div>
 
-<!-- UPDATED: These paths now point to the js folder -->
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/shipping.js"></script>
-<script src="js/invoice.js"></script>
-<script src="js/main.js"></script>
+<script>
+    // ---------- PLACEHOLDER PRODUCTS (easily replaceable) ----------
+    const productsData = [
+        {
+            id: 1,
+            name: "Vintage Ceramic Lamp",
+            price: 24.99,
+            description: "Hand-painted floral base, warm glow, perfect for cozy corners.",
+            imageIcon: "fa-lamp",
+            category: "home"
+        },
+        {
+            id: 2,
+            name: "Handcrafted Wooden Bowl",
+            price: 18.50,
+            description: "Carved from reclaimed oak, fair-trade donated piece.",
+            imageIcon: "fa-utensils",
+            category: "kitchen"
+        },
+        {
+            id: 3,
+            name: "Cozy Knit Blanket",
+            price: 32.00,
+            description: "Chunky knit, rich burgundy and cream, like new.",
+            imageIcon: "fa-blanket",
+            category: "home"
+        },
+        {
+            id: 4,
+            name: "Classic Novel Set (3 books)",
+            price: 12.75,
+            description: "Hemingway, Fitzgerald, Morrison – gently used.",
+            imageIcon: "fa-book",
+            category: "media"
+        },
+        {
+            id: 5,
+            name: "Wireless Earbuds",
+            price: 45.00,
+            description: "Open-box, 10hr battery, perfect for donors on the go.",
+            imageIcon: "fa-headphones",
+            category: "electronics"
+        },
+        {
+            id: 6,
+            name: "Artisan Coffee Mug",
+            price: 9.99,
+            description: "Purple & gold glaze, handmade pottery donation.",
+            imageIcon: "fa-mug-hot",
+            category: "kitchen"
+        }
+    ];
+
+    // Cart state: { id, name, price, quantity }
+    let cart = [];
+
+    // Helper: update cart UI, badge and totals
+    function updateCartUI() {
+        const cartContainer = document.getElementById('cartItemsList');
+        const cartTotalSpan = document.getElementById('cartTotalDisplay');
+        const badge = document.getElementById('cartCountBadge');
+
+        if (!cartContainer) return;
+
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<div class="empty-cart">Your cart is empty ✨</div>';
+            cartTotalSpan.innerText = `$0.00`;
+            if(badge) badge.innerText = '0';
+            return;
+        }
+
+        let totalItems = 0;
+        let totalPrice = 0;
+        let cartHtml = '';
+
+        for (let i = 0; i < cart.length; i++) {
+            const item = cart[i];
+            const itemTotal = item.price * item.quantity;
+            totalItems += item.quantity;
+            totalPrice += itemTotal;
+            cartHtml += `
+                <div class="cart-item">
+                    <span><strong>${escapeHtml(item.name)}</strong> x${item.quantity}</span>
+                    <span>$${itemTotal.toFixed(2)} 
+                        <button class="remove-item-btn" data-id="${item.id}" style="background:#c0392b; border:none; color:white; border-radius:40px; padding:2px 10px; margin-left:6px; font-size:11px;"><i class="fas fa-trash-alt"></i></button>
+                    </span>
+                </div>
+            `;
+        }
+
+        cartContainer.innerHTML = cartHtml;
+        cartTotalSpan.innerText = `$${totalPrice.toFixed(2)}`;
+        if(badge) badge.innerText = totalItems;
+
+        // attach remove event listeners
+        document.querySelectorAll('.remove-item-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.getAttribute('data-id'));
+                removeFromCart(id);
+            });
+        });
+    }
+
+    function removeFromCart(productId) {
+        const index = cart.findIndex(item => item.id === productId);
+        if (index !== -1) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+            } else {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+            saveCartToLocal();
+        }
+    }
+
+    function addToCart(product) {
+        const existing = cart.find(item => item.id === product.id);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1
+            });
+        }
+        updateCartUI();
+        saveCartToLocal();
+        // optional quick feedback
+        showToast(`✨ ${product.name} added to cart`, '#d4af37');
+    }
+
+    function saveCartToLocal() {
+        localStorage.setItem('hopeful_cart', JSON.stringify(cart));
+    }
+
+    function loadCartFromLocal() {
+        const saved = localStorage.getItem('hopeful_cart');
+        if (saved) {
+            try {
+                cart = JSON.parse(saved);
+                updateCartUI();
+            } catch(e) { console.warn(e); }
+        }
+    }
+
+    function showToast(msg, bgColor) {
+        let toast = document.createElement('div');
+        toast.innerText = msg;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.backgroundColor = bgColor;
+        toast.style.color = '#2c0b3a';
+        toast.style.padding = '12px 24px';
+        toast.style.borderRadius = '60px';
+        toast.style.fontWeight = 'bold';
+        toast.style.zIndex = '9999';
+        toast.style.boxShadow = '0 8px 20px black';
+        toast.style.backdropFilter = 'blur(8px)';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 1800);
+    }
+
+    // escape HTML to be safe
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // Render product grid (with filtering based on search)
+    let currentSearchTerm = '';
+
+    function renderProducts() {
+        const container = document.getElementById('productsContainer');
+        if (!container) return;
+        let filtered = [...productsData];
+        if (currentSearchTerm.trim() !== '') {
+            const term = currentSearchTerm.trim().toLowerCase();
+            filtered = productsData.filter(p => p.name.toLowerCase().includes(term) || p.description.toLowerCase().includes(term) || p.category.includes(term));
+        }
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; background:#2d1740; border-radius:40px;">🙏 No donated items match "${escapeHtml(currentSearchTerm)}". Please try again.</div>`;
+            return;
+        }
+
+        let html = '';
+        for (let product of filtered) {
+            // map fontawesome icon
+            let iconClass = product.imageIcon || 'fa-gift';
+            html += `
+                <div class="product-card" data-id="${product.id}">
+                    <div class="product-img">
+                        <i class="fas ${iconClass} fa-4x"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${escapeHtml(product.name)}</div>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                        <div class="product-desc">${escapeHtml(product.description)}</div>
+                        <button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}">
+                            <i class="fas fa-cart-plus"></i> Add to cart
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+
+        // attach add-to-cart events for each button
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.getAttribute('data-id'));
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                addToCart({ id, name, price });
+            });
+        });
+    }
+
+    // Shipping calculation logic - dynamic based on zip + flat rate plus distance simulation
+    function calculateShipping(zip) {
+        if (!zip || zip.trim().length < 3) return { valid: false, cost: null, message: "📦 Please enter a valid ZIP code." };
+        // simple simulation: zone based on first digit (fun nonprofit logic)
+        const firstDigit = zip.trim().charAt(0);
+        let baseCost = 5.99;
+        if (firstDigit >= '0' && firstDigit <= '3') baseCost = 4.99;
+        else if (firstDigit >= '4' && firstDigit <= '6') baseCost = 6.49;
+        else baseCost = 7.99;
+        // handling international style but we assume US
+        let finalCost = baseCost;
+        let message = `🚚 Estimated shipping: $${finalCost.toFixed(2)} (standard 3-7 days) — supports our green delivery fund.`;
+        return { valid: true, cost: finalCost, message };
+    }
+
+    // setup shipping calculator
+    function initShipping() {
+        const calcBtn = document.getElementById('calcShipBtn');
+        const zipInput = document.getElementById('zipCode');
+        const resultDiv = document.getElementById('shippingResult');
+
+        function updateShip() {
+            const zip = zipInput.value;
+            const res = calculateShipping(zip);
+            if (res.valid) {
+                resultDiv.innerHTML = `<i class="fas fa-shipping-fast"></i> ${res.message}`;
+                resultDiv.style.color = "#ffefbf";
+            } else {
+                resultDiv.innerHTML = `<i class="fas fa-map-marked-alt"></i> ${res.message}`;
+            }
+        }
+
+        calcBtn.addEventListener('click', updateShip);
+        zipInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') updateShip();
+        });
+        // initial demo example
+        resultDiv.innerHTML = `💜 Try ZIP: 10001, 90210 → see shipping calculation`;
+    }
+
+    // search functionality
+    function initSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        function performSearch() {
+            currentSearchTerm = searchInput.value;
+            renderProducts();
+        }
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+    }
+
+    // checkout and cart side reminder
+    function initCheckout() {
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showToast("💛 Your cart is empty! Add some donated items first.", "#b8860b");
+            } else {
+                const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0).toFixed(2);
+                showToast(`🙏 Thank you for donating! Total $${total} — (checkout simulation) 100% goes to charity.`, "#D4AF37");
+                // For a real nonprofit you'd integrate stripe or paypal here
+                alert(`💜 Nonprofit donation checkout \nTotal: $${total}\n\nThis is a demo. In production, connect Stripe/PayPal. Thank you for your support!`);
+            }
+        });
+    }
+
+    // refresh on local cart update and initial load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCartFromLocal();
+        renderProducts();
+        initShipping();
+        initSearch();
+        initCheckout();
+        // optional cart icon click just to show alert
+        const cartIcon = document.getElementById('cartIconTrigger');
+        if(cartIcon) {
+            cartIcon.addEventListener('click', () => {
+                showToast("🛒 Your cart is on the right sidebar! Add items to support our cause.", "#efcd73");
+            });
+        }
+    });
+</script>
 </body>
 </html>
