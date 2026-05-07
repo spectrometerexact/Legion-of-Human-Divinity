@@ -513,6 +513,7 @@
 
     function addToCart(product) {
        // ============================================
+  // ============================================
     // IMPROVED SHIPPING CALCULATOR
     // ============================================
     
@@ -527,22 +528,111 @@
         remoteZips: ['967', '968', '995', '996', '997', '998', '999']
     };
     
-    // Estimated weight per product (in pounds)
+    // Estimated weight per product (in pounds) - UPDATE THESE FOR YOUR PRODUCTS
     const productWeights = {
-        1: 3,   // Lamp
-        2: 2,   // Bowl
-        3: 4,   // Blanket
-        4: 2,   // Books
-        5: 0.5, // Earbuds
-        6: 1    // Mug
+        1: 3,   // Vintage Ceramic Lamp
+        2: 2,   // Handcrafted Wooden Bowl
+        3: 4,   // Cozy Knit Blanket
+        4: 2,   // Classic Novel Set
+        5: 0.5, // Wireless Earbuds
+        6: 1    // Artisan Coffee Mug
     };
     
+    // Helper function to get cart total - SAFELY handles empty cart
     function getCartTotalWeight() {
+        if (!cart || cart.length === 0) return 0;
         let totalWeight = 0;
-        cart.forEach(item => {
+        for (let i = 0; i < cart.length; i++) {
+            const item = cart[i];
             const weight = productWeights[item.id] || 1;
             totalWeight += weight * item.quantity;
+        }
+        return totalWeight;
+    }
+    
+    function getCartSubtotal() {
+        if (!cart || cart.length === 0) return 0;
+        return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    }
+    
+    // Main shipping calculation function
+    function calculateShipping(zip) {
+        // Invalid ZIP
+        if (!zip || zip.trim().length < 5) {
+            return { valid: false, cost: null, message: "📦 Please enter a valid 5-digit ZIP code." };
+        }
+        
+        const cartTotal = getCartSubtotal();
+        const totalWeight = getCartTotalWeight();
+        
+        // Free shipping for large donations
+        if (cartTotal >= SHIPPING_CONFIG.freeShippingThreshold && cartTotal > 0) {
+            return { valid: true, cost: 0, message: "✨ Free shipping! Orders over $75 qualify." };
+        }
+        
+        // Empty cart
+        if (cart.length === 0) {
+            return { valid: true, cost: 0, message: "Add items to the cart first, then calculate shipping" };
+        }
+        
+        // Calculate based on weight
+        let cost = SHIPPING_CONFIG.baseRate + (totalWeight * SHIPPING_CONFIG.ratePerPound);
+        
+        // Apply maximum
+        cost = Math.min(cost, SHIPPING_CONFIG.maxRate);
+        
+        // Remote area surcharge
+        const isRemote = SHIPPING_CONFIG.remoteZips.some(prefix => zip.startsWith(prefix));
+        if (isRemote) {
+            cost += 5;
+        }
+        
+        // Zone based on distance from your location
+        const yourArea = parseInt(SHIPPING_CONFIG.yourZipCode.substring(0, 3));
+        const theirArea = parseInt(zip.substring(0, 3));
+        const distance = Math.abs(yourArea - theirArea);
+        
+        if (distance > 500) {
+            cost += 3;
+        } else if (distance > 200) {
+            cost += 1.5;
+        }
+        
+        cost = parseFloat(cost.toFixed(2));
+        
+        let message = `🚚 Shipping: $${cost.toFixed(2)} (${totalWeight.toFixed(1)} lbs to ${zip})`;
+        if (isRemote) message += " + remote fee";
+        
+        return { valid: true, cost: cost, message: message };
+    }
+
+    // setup shipping calculator
+    function initShipping() {
+        const calcBtn = document.getElementById('calcShipBtn');
+        const zipInput = document.getElementById('zipCode');
+        const resultDiv = document.getElementById('shippingResult');
+
+        if (!calcBtn) return;
+        
+        function updateShip() {
+            const zip = zipInput.value.trim();
+            const res = calculateShipping(zip);
+            if (res.valid) {
+                resultDiv.innerHTML = `<i class="fas fa-shipping-fast"></i> ${res.message}`;
+                resultDiv.style.color = "#ffefbf";
+                // Store shipping cost for checkout
+                window.currentShippingCost = res.cost;
+            } else {
+                resultDiv.innerHTML = `<i class="fas fa-map-marked-alt"></i> ${res.message}`;
+            }
+        }
+
+        calcBtn.addEventListener('click', updateShip);
+        zipInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') updateShip();
         });
+        resultDiv.innerHTML = `💜 Add items to cart, then enter ZIP for shipping estimate`;
+    }
         return totalWeight;
     }
     
