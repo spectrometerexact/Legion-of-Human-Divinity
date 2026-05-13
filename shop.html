@@ -441,14 +441,25 @@
         });
     }
 
-   function initShipping() {
+ function initShipping() {
         const btn = document.getElementById('calcShipBtn');
         const zipInput = document.getElementById('zipCode');
         const resultDiv = document.getElementById('shippingResult');
         
+        // Product weights in pounds (UPDATE THESE for your products)
+        const productWeights = {
+            1: 3,   // Vintage Ceramic Lamp
+            2: 2,   // Handcrafted Wooden Bowl
+            3: 4,   // Cozy Knit Blanket
+            4: 2,   // Classic Novel Set
+            5: 0.5, // Wireless Earbuds
+            6: 1    // Artisan Coffee Mug
+        };
+        
+        // Your nonprofit's ZIP code - CHANGE THIS
+        const YOUR_ZIP = "90210";
+        
         function calculateShipping() {
-            // Calculate cart total
-            const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             const zip = zipInput.value.trim();
             
             if (!zip) {
@@ -461,56 +472,59 @@
                 return;
             }
             
-            // Free shipping on orders over $75
-            if (cartTotal >= 75) {
-                resultDiv.innerHTML = `<i class="fas fa-truck"></i> ✨ Free shipping! (Orders over $75)`;
-            } else {
-                let shipping = 5.99;
-                // Add $2 for remote areas (Hawaii, Alaska, Puerto Rico)
-                if (zip.startsWith('967') || zip.startsWith('968') || zip.startsWith('995') || zip.startsWith('006')) {
-                    shipping += 2;
-                }
-                const needed = (75 - cartTotal).toFixed(2);
-                resultDiv.innerHTML = `<i class="fas fa-truck"></i> Shipping: $${shipping.toFixed(2)} (Add $${needed} more for free shipping)`;
+            // 1. Calculate total weight
+            let totalWeight = 0;
+            cart.forEach(item => {
+                const weight = productWeights[item.id] || 1;
+                totalWeight += weight * item.quantity;
+            });
+            
+            // 2. Base rate + weight charge
+            let shipping = 4.99 + (totalWeight * 0.75);
+            
+            // 3. Calculate distance-based zone (using ZIP prefix)
+            const yourArea = parseInt(YOUR_ZIP.substring(0, 3));
+            const theirArea = parseInt(zip.substring(0, 3));
+            const distance = Math.abs(yourArea - theirArea);
+            
+            // 4. Add distance fee
+            if (distance > 500) {
+                shipping += 4.00;      // Far (e.g., NY to CA)
+            } else if (distance > 200) {
+                shipping += 2.00;      // Medium distance
+            } else if (distance > 50) {
+                shipping += 1.00;      // Close but not local
             }
+            // distance <= 50: no extra fee (local)
+            
+            // 5. Remote area surcharge (Hawaii, Alaska, Puerto Rico)
+            if (zip.startsWith('967') || zip.startsWith('968') || 
+                zip.startsWith('995') || zip.startsWith('996') || 
+                zip.startsWith('997') || zip.startsWith('998') || 
+                zip.startsWith('999') || zip.startsWith('006')) {
+                shipping += 5.00;
+            }
+            
+            // 6. Cap at maximum
+            shipping = Math.min(shipping, 19.99);
+            
+            // 7. Round to 2 decimals
+            shipping = parseFloat(shipping.toFixed(2));
+            
+            // Display result
+            let distanceText = "";
+            if (distance > 500) distanceText = " (long distance)";
+            else if (distance > 200) distanceText = " (medium distance)";
+            else if (distance > 50) distanceText = " (regional)";
+            else distanceText = " (local)";
+            
+            resultDiv.innerHTML = `<i class="fas fa-truck"></i> Shipping: $${shipping} (${totalWeight.toFixed(1)} lbs${distanceText})`;
         }
         
         if (btn) {
             btn.addEventListener('click', calculateShipping);
             zipInput.addEventListener('keyup', (e) => {
                 if (e.key === 'Enter') calculateShipping();
-            });
-        }
-    }
-
-    function initSearch() {
-        const btn = document.getElementById('searchBtn');
-        const input = document.getElementById('searchInput');
-        if (btn) {
-            btn.addEventListener('click', () => {
-                const term = input.value.toLowerCase();
-                const container = document.getElementById('productsContainer');
-                let html = '';
-                productsData.filter(p => p.name.toLowerCase().includes(term) || p.description.toLowerCase().includes(term)).forEach(product => {
-                    html += `<div class="product-card"><div class="product-img"><i class="fas ${product.imageIcon} fa-4x"></i></div><div class="product-info"><div class="product-title">${escapeHtml(product.name)}</div><div class="product-price">$${product.price.toFixed(2)}</div><div class="product-desc">${escapeHtml(product.description)}</div><button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}"><i class="fas fa-cart-plus"></i> Add to cart</button></div></div>`;
-                });
-                container.innerHTML = html || '<div style="text-align:center; padding:60px;">No items found</div>';
-                document.querySelectorAll('.add-to-cart').forEach(btn => {
-                    btn.addEventListener('click', () => addToCart({ id: parseInt(btn.dataset.id), name: btn.dataset.name, price: parseFloat(btn.dataset.price) }));
-                });
-            });
-        }
-    }
-
-    function initCheckout() {
-        const btn = document.getElementById('checkoutBtn');
-        if (btn) {
-            btn.addEventListener('click', () => {
-                if (cart.length === 0) alert("Your cart is empty!");
-                else {
-                    const total = cart.reduce((s, i) => s + (i.price * i.quantity), 0).toFixed(2);
-                    alert(`Thank you for your donation! Total: $${total}\n\n100% supports our mission.`);
-                }
             });
         }
     }
