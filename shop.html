@@ -441,15 +441,44 @@
         });
     }
 
-    function initShipping() {
+   function initShipping() {
         const btn = document.getElementById('calcShipBtn');
         const zipInput = document.getElementById('zipCode');
         const resultDiv = document.getElementById('shippingResult');
+        
+        function calculateShipping() {
+            // Calculate cart total
+            const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const zip = zipInput.value.trim();
+            
+            if (!zip) {
+                resultDiv.innerHTML = "Please enter a ZIP code";
+                return;
+            }
+            
+            if (cart.length === 0) {
+                resultDiv.innerHTML = "Add items to cart first";
+                return;
+            }
+            
+            // Free shipping on orders over $75
+            if (cartTotal >= 75) {
+                resultDiv.innerHTML = `<i class="fas fa-truck"></i> ✨ Free shipping! (Orders over $75)`;
+            } else {
+                let shipping = 5.99;
+                // Add $2 for remote areas (Hawaii, Alaska, Puerto Rico)
+                if (zip.startsWith('967') || zip.startsWith('968') || zip.startsWith('995') || zip.startsWith('006')) {
+                    shipping += 2;
+                }
+                const needed = (75 - cartTotal).toFixed(2);
+                resultDiv.innerHTML = `<i class="fas fa-truck"></i> Shipping: $${shipping.toFixed(2)} (Add $${needed} more for free shipping)`;
+            }
+        }
+        
         if (btn) {
-            btn.addEventListener('click', () => {
-                const zip = zipInput.value.trim();
-                if (zip) resultDiv.innerHTML = `<i class="fas fa-truck"></i> Estimated shipping: $5.99`;
-                else resultDiv.innerHTML = "Please enter a ZIP code";
+            btn.addEventListener('click', calculateShipping);
+            zipInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') calculateShipping();
             });
         }
     }
