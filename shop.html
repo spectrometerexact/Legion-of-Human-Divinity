@@ -292,11 +292,26 @@
 </head>
 <body>
 <div class="app-container">
-    <div class="header">
-        <div class="logo-area">
-            <h1><i class="fas fa-hand-holding-heart"></i> HopefulHands</h1>
-            <p>every donated item changes a life</p>
-        </div>
+  <div class="header">
+    <div class="logo-area">
+        <h1><i class="fas fa-hand-holding-heart"></i> HopefulHands</h1>
+        <p>every donated item changes a life · nonprofit marketplace</p>
+    </div>
+    
+    <!-- HOME BUTTON - ADD THIS -->
+    <a href="index.html" class="home-button">
+        <i class="fas fa-home"></i> Home
+    </a>
+    
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for donated goods...">
+        <button id="searchBtn"><i class="fas fa-search"></i></button>
+    </div>
+    <div class="cart-icon" id="cartIconTrigger">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCountBadge">0</span>
+    </div>
+</div>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search items...">
             <button id="searchBtn"><i class="fas fa-search"></i></button>
