@@ -432,7 +432,21 @@
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 1800);
     }
-
+    function updateCartTotal() {
+        const totalSpan = document.getElementById('cartTotalDisplay');
+        if (!totalSpan) return;
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const total = subtotal + currentShippingCost;
+        
+        // Update the display to include shipping
+        if (currentShippingCost > 0) {
+            totalSpan.innerHTML = `$${total.toFixed(2)} <span style="font-size: 0.7rem; display: block; color: #c6ab7a;">(includes $${currentShippingCost.toFixed(2)} shipping)</span>`;
+        } else {
+            totalSpan.innerText = `$${total.toFixed(2)}`;
+        }
+    }
+    
     function renderProducts() {
         const container = document.getElementById('productsContainer');
         if (!container) return;
