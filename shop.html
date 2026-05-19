@@ -366,7 +366,8 @@
     ];
 
     let cart = [];
-
+        let currentShippingCost = 0;
+    
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {
             if (m === '&') return '&amp;';
@@ -461,15 +462,14 @@
             });
         });
     }
-
- function initShipping() {
+function initShipping() {
         const btn = document.getElementById('calcShipBtn');
         const zipInput = document.getElementById('zipCode');
         const resultDiv = document.getElementById('shippingResult');
         
         // Product weights in pounds (UPDATE THESE for your products)
         const productWeights = {
-            1: 50,   // Ebike
+            1: 3,   // Vintage Ceramic Lamp
             2: 2,   // Handcrafted Wooden Bowl
             3: 4,   // Cozy Knit Blanket
             4: 2,   // Classic Novel Set
@@ -478,47 +478,50 @@
         };
         
         // Your nonprofit's ZIP code - CHANGE THIS
-        const YOUR_ZIP = "32703";
+        const YOUR_ZIP = "90210";
         
         function calculateShipping() {
             const zip = zipInput.value.trim();
             
             if (!zip) {
                 resultDiv.innerHTML = "Please enter a ZIP code";
+                currentShippingCost = 0;
+                updateCartTotal();
                 return;
             }
             
             if (cart.length === 0) {
                 resultDiv.innerHTML = "Add items to cart first";
+                currentShippingCost = 0;
+                updateCartTotal();
                 return;
             }
             
-            // 1. Calculate total weight
+            // Calculate total weight
             let totalWeight = 0;
             cart.forEach(item => {
                 const weight = productWeights[item.id] || 1;
                 totalWeight += weight * item.quantity;
             });
             
-            // 2. Base rate + weight charge
-            let shipping = 3.99 + (totalWeight * 0.55);
+            // Base rate + weight charge
+            let shipping = 4.99 + (totalWeight * 0.75);
             
-            // 3. Calculate distance-based zone (using ZIP prefix)
+            // Calculate distance-based zone
             const yourArea = parseInt(YOUR_ZIP.substring(0, 3));
             const theirArea = parseInt(zip.substring(0, 3));
             const distance = Math.abs(yourArea - theirArea);
             
-            // 4. Add distance fee
+            // Add distance fee
             if (distance > 500) {
-                shipping += 4.00;      // Far (e.g., NY to CA)
+                shipping += 4.00;
             } else if (distance > 200) {
-                shipping += 2.00;      // Medium distance
+                shipping += 2.00;
             } else if (distance > 50) {
-                shipping += 1.00;      // Close but not local
+                shipping += 1.00;
             }
-            // distance <= 50: no extra fee (local)
             
-            // 5. Remote area surcharge (Hawaii, Alaska, Puerto Rico)
+            // Remote area surcharge
             if (zip.startsWith('967') || zip.startsWith('968') || 
                 zip.startsWith('995') || zip.startsWith('996') || 
                 zip.startsWith('997') || zip.startsWith('998') || 
@@ -526,11 +529,12 @@
                 shipping += 5.00;
             }
             
-            // 6. Cap at maximum
+            // Cap at maximum
             shipping = Math.min(shipping, 19.99);
-            
-            // 7. Round to 2 decimals
             shipping = parseFloat(shipping.toFixed(2));
+            
+            // SAVE the shipping cost globally
+            currentShippingCost = shipping;
             
             // Display result
             let distanceText = "";
@@ -540,6 +544,9 @@
             else distanceText = " (local)";
             
             resultDiv.innerHTML = `<i class="fas fa-truck"></i> Shipping: $${shipping} (${totalWeight.toFixed(1)} lbs${distanceText})`;
+            
+            // Update the checkout total with shipping
+            updateCartTotal();
         }
         
         if (btn) {
