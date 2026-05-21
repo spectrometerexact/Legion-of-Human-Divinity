@@ -312,21 +312,6 @@
         <button id="searchBtn"><i class="fas fa-search"></i></button>
     </div>
     
-    <div class="cart-icon" id="cartIconTrigger">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count" id="cartCountBadge">0</span>
-    </div>
-</div>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search items...">
-            <button id="searchBtn"><i class="fas fa-search"></i></button>
-        </div>
-        <div class="cart-icon">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count" id="cartCountBadge">0</span>
-        </div>
-    </div>
-
     <div class="main-layout">
         <div class="products-grid">
             <div class="section-title"><i class="fas fa-box-open"></i> Donated treasures</div>
@@ -380,12 +365,10 @@
     function updateCartUI() {
         const container = document.getElementById('cartItemsList');
         const totalSpan = document.getElementById('cartTotalDisplay');
-        const badge = document.getElementById('cartCountBadge');
         if (!container) return;
         if (cart.length === 0) {
             container.innerHTML = '<div class="empty-cart">Your cart is empty ✨</div>';
             totalSpan.innerText = '$0.00';
-            if (badge) badge.innerText = '0';
             return;
         }
         let totalItems = 0, totalPrice = 0, html = '';
@@ -396,7 +379,6 @@
         });
         container.innerHTML = html;
         totalSpan.innerText = `$${totalPrice.toFixed(2)}`;
-        if (badge) badge.innerText = totalItems;
         document.querySelectorAll('.remove-item-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const id = parseInt(btn.dataset.id);
@@ -567,6 +549,76 @@ function initShipping() {
             btn.addEventListener('click', calculateShipping);
             zipInput.addEventListener('keyup', (e) => {
                 if (e.key === 'Enter') calculateShipping();
+            });
+        }
+    }
+
+        function initSearch() {
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+        
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                const term = searchInput.value.toLowerCase();
+                const container = document.getElementById('productsContainer');
+                let html = '';
+                const filtered = productsData.filter(p => 
+                    p.name.toLowerCase().includes(term) || 
+                    p.description.toLowerCase().includes(term)
+                );
+                
+                if (filtered.length === 0) {
+                    container.innerHTML = '<div style="text-align:center; padding:60px;">No items found</div>';
+                    return;
+                }
+                
+                filtered.forEach(product => {
+                    html += `<div class="product-card">
+                        <div class="product-img"><i class="fas ${product.imageIcon} fa-4x"></i></div>
+                        <div class="product-info">
+                            <div class="product-title">${escapeHtml(product.name)}</div>
+                            <div class="product-price">$${product.price.toFixed(2)}</div>
+                            <div class="product-desc">${escapeHtml(product.description)}</div>
+                            <button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}">
+                                <i class="fas fa-cart-plus"></i> Add to cart
+                            </button>
+                        </div>
+                    </div>`;
+                });
+                container.innerHTML = html;
+                
+                document.querySelectorAll('.add-to-cart').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        addToCart({
+                            id: parseInt(btn.dataset.id),
+                            name: btn.dataset.name,
+                            price: parseFloat(btn.dataset.price)
+                        });
+                    });
+                });
+            });
+        }
+        
+        if (searchInput) {
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+        }
+    }
+
+        function initCheckout() {
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert("Your cart is empty! Add some items first.");
+                } else {
+                    const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+                    const total = subtotal + (currentShippingCost || 0);
+                    alert(`💜 HopefulHands Donation\n\nSubtotal: $${subtotal.toFixed(2)}\nShipping: $${(currentShippingCost || 0).toFixed(2)}\n\nTotal Donation: $${total.toFixed(2)}\n\nThank you for your support!`);
+                }
             });
         }
     }
