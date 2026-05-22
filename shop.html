@@ -710,6 +710,30 @@ function initShipping() {
         }
     }
 
+        // Lightbox functions
+    function openLightbox(imageUrl, productName) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        if (lightbox && lightboxImg && imageUrl) {
+            lightboxImg.src = imageUrl;
+            lightboxImg.alt = productName;
+            lightbox.classList.add('active');
+        }
+    }
+    
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox) {
+            lightbox.classList.remove('active');
+        }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
+    
     document.addEventListener('DOMContentLoaded', () => {
         const saved = localStorage.getItem('hopeful_cart');
         if (saved) { cart = JSON.parse(saved); updateCartUI(); }
