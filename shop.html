@@ -493,36 +493,54 @@
         }
     }
     
-    function renderProducts() {
+   function renderProducts() {
         const container = document.getElementById('productsContainer');
         if (!container) return;
+        
+        let filtered = [...productsData];
+        if (currentSearchTerm.trim() !== '') {
+            const term = currentSearchTerm.trim().toLowerCase();
+            filtered = productsData.filter(p => p.name.toLowerCase().includes(term) || p.description.toLowerCase().includes(term) || (p.category && p.category.includes(term)));
+        }
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; background:#2d1740; border-radius:40px;">🙏 No donated items match "${escapeHtml(currentSearchTerm)}". Please try again.</div>`;
+            return;
+        }
+
         let html = '';
-    for (let product of filtered) {
-        // Use this for REAL IMAGES
-        html += `
-            <div class="product-card" data-id="${product.id}">
-                <div class="product-img" onclick="openLightbox('${product.imageUrl}', '${escapeHtml(product.name)}')">
-                    <img src="${product.imageUrl}" alt="${escapeHtml(product.name)}" style="width:100%; height:100%; object-fit:cover;">
+        for (let product of filtered) {
+            // Check if we have a real image URL
+            const imageToShow = product.imageUrl ? product.imageUrl : null;
+            const iconToShow = product.imageIcon ? product.imageIcon : 'fa-gift';
+            
+            html += `
+                <div class="product-card" data-id="${product.id}">
+                    <div class="product-img" ${imageToShow ? `onclick="openLightbox('${imageToShow}', '${escapeHtml(product.name)}')"` : ''}>
+                        ${imageToShow ? 
+                            `<img src="${imageToShow}" alt="${escapeHtml(product.name)}" style="width:100%; height:100%; object-fit:cover;">` : 
+                            `<i class="fas ${iconToShow} fa-4x"></i>`
+                        }
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${escapeHtml(product.name)}</div>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                        <div class="product-desc">${escapeHtml(product.description)}</div>
+                        <button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}">
+                            <i class="fas fa-cart-plus"></i> Add to cart
+                        </button>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <div class="product-title">${escapeHtml(product.name)}</div>
-                    <div class="product-price">$${product.price.toFixed(2)}</div>
-                    <div class="product-desc">${escapeHtml(product.description)}</div>
-                    <button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}">
-                        <i class="fas fa-cart-plus"></i> Add to cart
-                    </button>
-                </div>
-            </div>
-        `;
-    });
+            `;
+        }
         container.innerHTML = html;
+
         document.querySelectorAll('.add-to-cart').forEach(btn => {
-            btn.addEventListener('click', () => {
-                addToCart({
-                    id: parseInt(btn.dataset.id),
-                    name: btn.dataset.name,
-                    price: parseFloat(btn.dataset.price)
-                });
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(btn.getAttribute('data-id'));
+                const name = btn.getAttribute('data-name');
+                const price = parseFloat(btn.getAttribute('data-price'));
+                addToCart({ id, name, price });
             });
         });
     }
