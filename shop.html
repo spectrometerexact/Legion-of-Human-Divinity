@@ -497,20 +497,24 @@
         const container = document.getElementById('productsContainer');
         if (!container) return;
         let html = '';
-        productsData.forEach(product => {
-            html += `
-                <div class="product-card">
-                    <div class="product-img">
-                    <img src="${product.imageUrl}" alt="${product.name}" style="width:100%; height:100%; object-fit:cover;">
+    for (let product of filtered) {
+        // Use this for REAL IMAGES
+        html += `
+            <div class="product-card" data-id="${product.id}">
+                <div class="product-img" onclick="openLightbox('${product.imageUrl}', '${escapeHtml(product.name)}')">
+                    <img src="${product.imageUrl}" alt="${escapeHtml(product.name)}" style="width:100%; height:100%; object-fit:cover;">
                 </div>
-                        <div class="product-title">${escapeHtml(product.name)}</div>
-                        <div class="product-price">$${product.price.toFixed(2)}</div>
-                        <div class="product-desc">${escapeHtml(product.description)}</div>
-                        <button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}"><i class="fas fa-cart-plus"></i> Add to cart</button>
-                    </div>
+                <div class="product-info">
+                    <div class="product-title">${escapeHtml(product.name)}</div>
+                    <div class="product-price">$${product.price.toFixed(2)}</div>
+                    <div class="product-desc">${escapeHtml(product.description)}</div>
+                    <button class="add-to-cart" data-id="${product.id}" data-name="${escapeHtml(product.name)}" data-price="${product.price}">
+                        <i class="fas fa-cart-plus"></i> Add to cart
+                    </button>
                 </div>
-            `;
-        });
+            </div>
+        `;
+    });
         container.innerHTML = html;
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', () => {
