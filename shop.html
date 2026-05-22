@@ -415,7 +415,8 @@
     ];
 
     let cart = [];
-        let currentShippingCost = 0;
+    let currentShippingCost = 0;
+    let currentSearchTerm = '';  // ← ADD THIS LINE
     
     function escapeHtml(str) {
         return str.replace(/[&<>]/g, function(m) {
