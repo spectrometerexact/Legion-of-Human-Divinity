@@ -46,8 +46,8 @@ exports.handler = async (event) => {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${process.env.URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.URL}/shop.html`,
+      success_url: `https://glittering-parfait-2b07d4.netlify.app/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://glittering-parfait-2b07d4.netlify.app/shop.html`,
       customer_email: customerEmail,
       shipping_address_collection: {
         allowed_countries: ['US', 'CA'],
