@@ -727,13 +727,63 @@ function initShipping() {
         function initCheckout() {
         const checkoutBtn = document.getElementById('checkoutBtn');
         if (checkoutBtn) {
-            checkoutBtn.addEventListener('click', () => {
+            checkoutBtn.addEventListener('click', async () => {
                 if (cart.length === 0) {
                     alert("Your cart is empty! Add some items first.");
-                } else {
-                    const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-                    const total = subtotal + (currentShippingCost || 0);
-                    alert(`💜 HopefulHands Donation\n\nSubtotal: $${subtotal.toFixed(2)}\nShipping: $${(currentShippingCost || 0).toFixed(2)}\n\nTotal Donation: $${total.toFixed(2)}\n\nThank you for your support!`);
+                    return;
+                }
+                
+                // Ask for email (required for shipping confirmation)
+                const customerEmail = prompt("Please enter your email address to receive order confirmation:", "");
+                if (!customerEmail || !customerEmail.includes('@')) {
+                    alert("A valid email address is required.");
+                    return;
+                }
+                
+                // Get shipping cost from your existing calculation
+                let shippingCost = currentShippingCost;
+                if (shippingCost === 0 && cart.length > 0) {
+                    shippingCost = 5.99;
+                }
+                
+                // Show loading state
+                checkoutBtn.disabled = true;
+                checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Redirecting to secure checkout...';
+                
+                try {
+                    // Call your Netlify function
+                    const response = await fetch('/.netlify/functions/create-checkout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            items: cart.map(item => ({
+                                id: item.id,
+                                name: item.name,
+                                price: item.price,
+                                quantity: item.quantity
+                            })),
+                            shippingCost: shippingCost,
+                            customerEmail: customerEmail
+                        }),
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.url) {
+                        // Clear cart before redirecting
+                        localStorage.removeItem('hopeful_cart');
+                        // Redirect to Stripe Checkout
+                        window.location.href = data.url;
+                    } else {
+                        throw new Error('No checkout URL received');
+                    }
+                } catch (error) {
+                    console.error('Checkout error:', error);
+                    alert('Unable to start checkout. Please try again.');
+                    checkoutBtn.disabled = false;
+                    checkoutBtn.innerHTML = '<i class="fas fa-donate"></i> Proceed to Checkout';
                 }
             });
         }
