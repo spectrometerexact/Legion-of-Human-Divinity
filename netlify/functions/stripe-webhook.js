@@ -66,9 +66,9 @@ async function sendOrderEmail(customerEmail, customerName, addressString, itemsL
     // Get your service ID, template ID, and public key
     
     const emailjsData = {
-        service_id: 'YOUR_EMAILJS_SERVICE_ID',
-        template_id: 'YOUR_EMAILJS_TEMPLATE_ID',
-        user_id: 'YOUR_EMAILJS_PUBLIC_KEY',
+        service_id: 'service_wrbff7r',
+        template_id: 'template_t6rra3a',
+        user_id: 'eRLcjFCQleQKqk4FD',
         template_params: {
             customer_email: customerEmail,
             customer_name: customerName,
